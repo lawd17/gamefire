@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
 
 //Actualizar
 if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
-  if (!validarDatos($_POST)) {
+  if (!validarDatos($_GET)) {
     header($get_400);
     exit();
   }

@@ -13,31 +13,31 @@ function validarDatos($input){
 
   if (isset($input["user_id"])) { 
     //valido nombre con letra y numero sin punto ni barra entre 8 y 15 caracteres 
-    $valido = preg_match("/^(?=.{8,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/", $input["username"]) ? $valido : false;
+    $valido = preg_match("/^[A-Za-z0-9]{1,50}$/", $input["user_id"]) ? $valido : false;
   }
 
   if (isset($input["direccion1"])) {
     //Minimo un digito, Mayuscula y una miniscula puede tener otros caracteres, entre 8 y 25 caracteres
-    $valido = preg_match("/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z]?)\S{8,25}$/", $input["nombre"]) ? $valido : false;
+    $valido = preg_match("/^[a-zñáéíóú]+$/", $input["direccion1"]) ? $valido : false;
   }
 
   if (isset($input["direccion2"])) {
-    $valido = preg_match("/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/", $input["nombre"]) ? $valido : false;
+    $valido = preg_match("/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/", $input["direccion2"]) ? $valido : false;
   }
 
   if (isset($input["ciudad"])) {
     //Maximo 5 palabra con la primera en mayuscula y puede tener espacios
-    $valido = preg_match("/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]?){1,5}$/", $input["apellidos"]) ? $valido : false;
+    $valido = preg_match("/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]?){1,5}$/", $input["ciudad"]) ? $valido : false;
   }
 
   if (isset($input["codigo_postal"])) {
     //puede empezar por +34 ó -, seguid de 9 numeros que pueden estar separados por -
-    $valido = preg_match("/(\+34|0034|34)?[ -]*([0-9][ -]*){9}/", $input["telefono"]) ? $valido : false;
+    $valido = preg_match("/^d{5}(?:[-s]d{4})?$/", $input["codigo_postal"]) ? $valido : false;
   }
 
   if (isset($input["pais"])) {
     //puede empezar por +34 ó -, seguid de 9 numeros que pueden estar separados por -
-    $valido = preg_match("/(\+34|0034|34)?[ -]*([0-9][ -]*){9}/", $input["telefono"]) ? $valido : false;
+    $valido = preg_match("/(\+34|0034|34)?[ -]*([0-9][ -]*){9}/", $input["pais"]) ? $valido : false;
   }
 
   return $valido;

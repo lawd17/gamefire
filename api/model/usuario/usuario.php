@@ -18,7 +18,7 @@ function validarDatos($input){
 
   if (isset($input["password"])) {
     //Minimo un digito, Mayuscula y una miniscula puede tener otros caracteres, entre 8 y 25 caracteres
-    $valido = preg_match("/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z]?)\S{8,25}$/", $abecedario) ? $valido : false;
+    $valido = preg_match("/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z]?)\S{8,25}$/", $input["password"]) ? $valido : false;
   }
 
   if (isset($input["nombre"])) {

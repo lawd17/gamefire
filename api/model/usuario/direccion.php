@@ -2,6 +2,7 @@
 include "../config.php";
 include "../utilsDb.php";
 $dbConn =  connect($db);
+$get_400 = "HTTP/1.1 400 Incorrect some data";
 
 function validarDatos($input){
   $valido = true;
@@ -12,32 +13,34 @@ function validarDatos($input){
   }
 
   if (isset($input["user_id"])) { 
-    //valido nombre con letra y numero sin punto ni barra entre 8 y 15 caracteres 
+    //valido cualquier letra y numero sin especio entre 1 y 50 caracteres
     $valido = preg_match("/^[A-Za-z0-9]{1,50}$/", $input["user_id"]) ? $valido : false;
   }
 
-  if (isset($input["direccion1"])) {
-    //Minimo un digito, Mayuscula y una miniscula puede tener otros caracteres, entre 8 y 25 caracteres
-    $valido = preg_match("/^[a-zñáéíóú]+$/", $input["direccion1"]) ? $valido : false;
+  if (isset($input["direccion1"]) && isset($input["direccion2"])) {
+    //cualquer palabra que puede tener letras, caracteres y numeros
+    $valido = preg_match("/^(((\w\d*)+[,:.º-]?[\s\d]){1,20})+$/", $input["direccion1"]) ? $valido : false;
+  
   }
 
-  if (isset($input["direccion2"])) {
-    $valido = preg_match("/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/", $input["direccion2"]) ? $valido : false;
+  if (isset($input["direccion2"]) && $input["direccion2"] !== "") {
+    //cualquer palabra que puede tener letras, caracteres y numeros
+    $valido = preg_match("/^(((\w\d*)+[,:.º-]?[\s\d]){1,20})$/", $input["direccion1"]) ? $valido : false;
   }
 
   if (isset($input["ciudad"])) {
-    //Maximo 5 palabra con la primera en mayuscula y puede tener espacios
-    $valido = preg_match("/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]?){1,5}$/", $input["ciudad"]) ? $valido : false;
+    //Cualquier palabra con la primera letra en mayuscula
+    $valido = preg_match("/^(\w*[\s]?){1,5}$/", $input["ciudad"]) ? $valido : false;
   }
 
   if (isset($input["codigo_postal"])) {
     //puede empezar por +34 ó -, seguid de 9 numeros que pueden estar separados por -
-    $valido = preg_match("/^d{5}(?:[-s]d{4})?$/", $input["codigo_postal"]) ? $valido : false;
+    $valido = preg_match("/^[0-5][1-9]{3}[0-9]$/", $input["codigo_postal"]) ? $valido : false;
   }
 
   if (isset($input["pais"])) {
     //puede empezar por +34 ó -, seguid de 9 numeros que pueden estar separados por -
-    $valido = preg_match("/(\+34|0034|34)?[ -]*([0-9][ -]*){9}/", $input["pais"]) ? $valido : false;
+    $valido = preg_match("/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+)$/", $input["pais"]) ? $valido : false;
   }
 
   return $valido;
@@ -47,8 +50,12 @@ function validarDatos($input){
   listar todos los posts o solo uno
  */
 if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-    if (isset($_GET['id'])){
+    if (isset($_GET['user_id'])){
       //Mostrar un post
+      if (!validarDatos($_GET)) {
+        header($get_400);
+        exit();
+      }
       $sql = $dbConn->prepare("SELECT * FROM direccion where user_id=:user_id");
       $sql->bindValue(':user_id', $_GET['user_id']);
       $sql->execute();
@@ -58,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
 	  }
     else {
       //Mostrar lista de post
-      $sql = $dbConn->prepare("SELECT * FROM usuario LIMIT 10");
+      $sql = $dbConn->prepare("SELECT * FROM direccion LIMIT 10");
       $sql->execute();
       $sql->setFetchMode(PDO::FETCH_ASSOC);
       header("HTTP/1.1 200 OK");
@@ -67,13 +74,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
 	}
 }
 // Crear un nuevo post
-if ($_SERVER['REQUEST_METHOD'] == 'POST')
-{
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $input = $_POST;
-    $sql = "INSERT INTO usuario
-          (id, username, password, nombre, apellidos, telefono)
+    if (!validarDatos($input)) {
+      header($get_400);
+      exit();
+    }
+
+    $sql = "INSERT INTO direccion
+          (id, user_id, direccion1, direccion2, ciudad, codigo_postal, pais)
           VALUES
-          (:id, :username, :password, :nombre, :apellidos, :telefono)";
+          (:id, :user_id, :direccion1, :direccion2, :ciudad, :codigo_postal, :pais)";
     $statement = $dbConn->prepare($sql);
     bindAllValues($statement, $input);
     $statement->execute();
@@ -87,27 +98,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 }
 
 //Borrar
-if ($_SERVER['REQUEST_METHOD'] == 'DELETE')
-{
-	$id = $_GET['id'];
-  $statement = $dbConn->prepare("DELETE FROM usuario where id=:id");
-  $statement->bindValue(':id', $id);
+if ($_SERVER['REQUEST_METHOD'] == 'DELETE'){
+	$id = $_GET['user_id'];
+  if (!validarDatos($_GET)) {
+    header($get_400);
+    exit();
+  }
+  $statement = $dbConn->prepare("DELETE FROM direccion where user_id=:user_id");
+  $statement->bindValue(':user_id', $id);
   $statement->execute();
 	header("HTTP/1.1 200 OK");
 	exit();
 }
 
 //Actualizar
-if ($_SERVER['REQUEST_METHOD'] == 'PUT')
-{
+if ($_SERVER['REQUEST_METHOD'] == 'PUT'){
     $input = $_GET;
-    $postId = $input['id'];
+    if (!validarDatos($input)) {
+      header($get_400);
+      exit();
+    }
+    $postId = $input['user_id'];
     $fields = getParams($input);
     $sql = "
-          UPDATE usuario
+          UPDATE direccion
           SET $fields
-          WHERE id='$postId'
-           ";
+          WHERE user_id='$postId'";
     $statement = $dbConn->prepare($sql);
     bindAllValues($statement, $input);
     $statement->execute();
@@ -117,4 +133,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT')
 
 //En caso de que ninguna de las opciones anteriores se haya ejecutado
 header("HTTP/1.1 400 Bad Request");
-?>

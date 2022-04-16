@@ -22,9 +22,9 @@ function validarDatos($input){
   listar todos los posts o solo uno
  */
 if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-  if (isset($_GET[$id])){
-    $input = $_GET[$id];
-    $response = obtenerUno($dbConn,$tableName, $id ,$input);
+  if (isset($_GET[$idName])){
+    $input = $_GET[$idName];
+    $response = obtenerUno($dbConn,$tableName, $idName ,$input);
     ok_200();
     echo json_encode($response);
     exit();

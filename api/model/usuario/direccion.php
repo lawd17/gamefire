@@ -1,8 +1,10 @@
 <?php
 include "../config.php";
 include "../utilsDb.php";
+include "../errors.php";
 $dbConn =  connect($db);
-$get_400 = "HTTP/1.1 400 Incorrect some data";
+$idName = "user_id";
+$tableName = "direccion";
 
 function validarDatos($input){
   $valido = true;
@@ -50,86 +52,64 @@ function validarDatos($input){
   listar todos los posts o solo uno
  */
 if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-    if (isset($_GET['user_id'])){
-      //Mostrar un post
-      if (!validarDatos($_GET)) {
-        header($get_400);
-        exit();
-      }
-      $sql = $dbConn->prepare("SELECT * FROM direccion where user_id=:user_id");
-      $sql->bindValue(':user_id', $_GET['user_id']);
-      $sql->execute();
-      header("HTTP/1.1 200 OK");
-      echo json_encode(  $sql->fetch(PDO::FETCH_ASSOC));
-      exit();
-	  }
-    else {
-      //Mostrar lista de post
-      $sql = $dbConn->prepare("SELECT * FROM direccion LIMIT 10");
-      $sql->execute();
-      $sql->setFetchMode(PDO::FETCH_ASSOC);
-      header("HTTP/1.1 200 OK");
-      echo json_encode($sql->fetchAll());
-      exit();
-	}
-}
-// Crear un nuevo post
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $input = $_POST;
+  if (isset($_GET[$idName])){
+    $input = $_GET;
     if (!validarDatos($input)) {
-      header($get_400);
+      error_400("Some data are invalid");
       exit();
     }
 
-    $sql = "INSERT INTO direccion
-          (id, user_id, direccion1, direccion2, ciudad, codigo_postal, pais)
-          VALUES
-          (:id, :user_id, :direccion1, :direccion2, :ciudad, :codigo_postal, :pais)";
-    $statement = $dbConn->prepare($sql);
-    bindAllValues($statement, $input);
-    $statement->execute();
-    $postId = $dbConn->lastInsertId();
-    if($postId){
-      $input['id'] = $postId;
-      header("HTTP/1.1 200 OK");
-      echo json_encode($input);
-      exit();
-	 }
+    $response = obtenerUno($dbConn,$tableName, $idName ,$input);
+    ok_200();
+    echo json_encode($response);
+    exit();
+  }
+  else {
+    $response = obtenerTodos($dbConn,$tableName);
+    ok_200();
+    echo json_encode($response);
+    exit();
+}
+}
+
+// Crear un nuevo post
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+  $input = $_POST;
+  if (!validarDatos($input)) {
+    header($get_400);
+    exit();
+  }
+
+  $response = insertar($dbConn, $tableName, $input);
+  ok_200();
+  echo json_encode($response);
+  exit;
+
 }
 
 //Borrar
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE'){
-	$id = $_GET['user_id'];
-  if (!validarDatos($_GET)) {
-    header($get_400);
-    exit();
-  }
-  $statement = $dbConn->prepare("DELETE FROM direccion where user_id=:user_id");
-  $statement->bindValue(':user_id', $id);
-  $statement->execute();
-	header("HTTP/1.1 200 OK");
-	exit();
+$input = $_GET;
+if (!validarDatos($input)) {
+  error_400("Some data are invalid");
+  exit();
+}
+
+$response = eliminar($idName, $dbConn, $tableName, $input);
+ok_200();
+echo json_encode($response);
+exit;
 }
 
 //Actualizar
 if ($_SERVER['REQUEST_METHOD'] == 'PUT'){
-    $input = $_GET;
-    if (!validarDatos($input)) {
-      header($get_400);
-      exit();
-    }
-    $postId = $input['user_id'];
-    $fields = getParams($input);
-    $sql = "
-          UPDATE direccion
-          SET $fields
-          WHERE user_id='$postId'";
-    $statement = $dbConn->prepare($sql);
-    bindAllValues($statement, $input);
-    $statement->execute();
-    header("HTTP/1.1 200 OK");
-    exit();
+$input = $_GET;
+if (!validarDatos($input)) {
+  error_400("Some data are invalid");
+  exit();
 }
-
-//En caso de que ninguna de las opciones anteriores se haya ejecutado
-header("HTTP/1.1 400 Bad Request");
+$response = actualizar($idName, $dbConn, $tableName, $input);
+ok_200();
+echo json_encode($response);
+exit;
+}

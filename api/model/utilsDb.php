@@ -80,16 +80,10 @@ function lanzarConsulta($dbConn, $input, $sql){
         bindAllValues($statement, $input);
         $statement->execute();
 
-        $postId = $statement->lastInsertId();
-        if($postId){
-            $input['id'] = $postId;
-            header("HTTP/1.1 200 OK");
-            echo json_encode($input);
-            exit();
-        }
+        return true;
       } catch (PDOException $exception) {
-        header("HTTP/1.1 500 Internal error");
-        exit($exception);
+        header("HTTP/1.1 500 Internal error" . $exception);
+        exit();
       }
   }
 
@@ -102,8 +96,8 @@ function lanzarConsulta($dbConn, $input, $sql){
 
         return $response;
     } catch (PDOException $exception) {
-        header("HTTP/1.1 500 Internal error");
-        exit($exception);
+        header("HTTP/1.1 500 Internal error" . $exception);
+        exit();
     }
   }
 
@@ -119,8 +113,8 @@ function lanzarConsulta($dbConn, $input, $sql){
 
         return $response;
     } catch (Exception $exception) {
-        header("HTTP/1.1 500 Internal error");
-        exit($exception);
+        header("HTTP/1.1 500 Internal error" . $exception);
+        exit();
     }
   }
 
@@ -132,7 +126,8 @@ function lanzarConsulta($dbConn, $input, $sql){
 
         return $statement->fetchAll();
     } catch (PDOException $exception) {
-        exit($exception);
+      header("HTTP/1.1 500 Internal error" . $exception);
+      exit();
     }
   }
 
@@ -144,8 +139,24 @@ function obtenerUno($dbConn, $tableName, $idName, $input){
 
         return $statement->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $exception) {
-        header("HTTP/1.1 500 Internal error");
-        exit($exception);
+      header("HTTP/1.1 500 Internal error" . $exception);
+      exit();
     }
+}
+
+function evaluarParametro($input, $param, $regex, $message){
+  $valido = true;
+
+  if (isset($input[$param])) {
+    $valido = preg_match($regex, $param) ? $valido : false;
+
+  }
+
+  if ($valido) {
+    $message += "El campo $param no cumple el patrón de validacion. \n";
+  }
+
+
+  return $message;
 }
   

@@ -4,20 +4,16 @@ include "../utilsDb.php";
 include "../errors.php";
 $dbConn =  connect($db);
 $idName = "id";
-$categoria = "id_categoria";
-$nombre = "nombre";
-$tableName = "producto";
+$tableName = "venta";
 
 function validarDatos($input){
   $message = "";
 
   $message = evaluarParametro($input,"id", "/^[A-Za-z0-9]{1,50}$/", $message);
-  $message = evaluarParametro($input,"nombre", "/^[A-ZÁÉÍÓÚa-zñáéíóú\s]*$/", $message);
-  $message = evaluarParametro($input,"imagen", "/^[\w/\.]+(\s|)$/", $message);
-  $message = evaluarParametro($input,"precio_venta", "/^[\d]+(\.\,[\d]{1,4})?$/", $message);
-  $message = evaluarParametro($input,"stock", "/^\d{1,5}$/", $message);
-  $message = evaluarParametro($input,"id_categoria", "/^[A-Za-z0-9]{1,50}$/", $message);
-
+  $message = evaluarParametro($input,"id_usuario", "/^[A-Za-z0-9]{1,50}$/", $message);
+  $message = evaluarParametro($input,"fecha", "/^(?:3[01]|[12][0-9]|0?[1-9])([\-/.])(0?[1-9]|1[1-2])\1\d{4}$/", $message);
+  $message = evaluarParametro($input,"impuesto", "/^[\d]+(\.\,[\d]{1,4})?$/", $message);
+  $message = evaluarParametro($input,"total", "/^[\d]+(\.\,[\d]{1,4})?$/", $message);
 
   if ($message != 0) {
     header(error_400() . $message);
@@ -35,24 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
     ok_200();
     echo json_encode($response);
     exit();
-  } else if (isset($_GET[$categoria])){
-    $input = $_GET[$categoria];
-    $response = obtenerUno($dbConn,$tableName, $idName ,$input);
-    ok_200();
-    echo json_encode($response);
-    exit();
-  } else if (isset($_GET[$nombre])){
-    $input = $_GET[$nombre];
-    $response = obtenerUno($dbConn,$tableName, $idName ,$input);
-    ok_200();
-    echo json_encode($response);
-    exit();
-  } else {
+  } 
+
     $response = obtenerTodos($dbConn,$tableName);
     ok_200();
     echo json_encode($response);
     exit();
-  }
+
 }
 
 // Crear un nuevo post

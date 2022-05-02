@@ -1,4 +1,6 @@
 <?php
+header('Access-Control-Allow-Origin: *', true);
+
 include "../config.php";
 include "../utilsDb.php";
 include "../errors.php";

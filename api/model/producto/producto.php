@@ -1,4 +1,6 @@
 <?php
+header('Access-Control-Allow-Origin: *', true);
+
 include "../config.php";
 include "../utilsDb.php";
 include "../errors.php";
@@ -33,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
     $input = $_GET[$idName];
     $response = obtenerUno($dbConn,$tableName, $idName ,$input);
     ok_200();
+    header('Access-Control-Allow-Origin: http://site-a.com', false);
     echo json_encode($response);
     exit();
   } else if (isset($_GET[$categoria])){

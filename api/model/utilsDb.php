@@ -131,10 +131,10 @@ function lanzarConsulta($dbConn, $input, $sql){
     }
   }
 
-function obtenerUno($dbConn, $tableName, $idName, $input){
+function obtenerUno($dbConn, $tableName, $columName, $input){
     try {
-        $statement = $dbConn->prepare("SELECT * FROM $tableName where $idName=:$idName");
-        $statement->bindValue(":$idName", $input[$idName]);
+        $statement = $dbConn->prepare("SELECT * FROM $tableName where $columName=:$columName");
+        $statement->bindValue(":$columName", $input[$columName]);
         $statement->execute();
 
         return $statement->fetch(PDO::FETCH_ASSOC);

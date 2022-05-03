@@ -1,4 +1,6 @@
 <?php
+header('Access-Control-Allow-Origin: *', true);
+
 include "../config.php";
 include "../utilsDb.php";
 include "../errors.php";
@@ -24,7 +26,7 @@ function validarDatos($input){
 if ($_SERVER['REQUEST_METHOD'] == 'GET'){
   if (isset($_GET[$idName])){
     $input = $_GET[$idName];
-    $response = obtenerUno($dbConn,$tableName, $idName ,$input);
+    $response = obtenerUno($dbConn, $tableName, $idName ,$input);
     ok_200();
     echo json_encode($response);
     exit();

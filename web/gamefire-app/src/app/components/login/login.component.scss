@@ -1,5 +1,5 @@
-html,
-#body-login {
+
+html,#body-login {
     height: 100%;
 }
 
@@ -36,4 +36,9 @@ html,
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+.error {
+  font-size: smaller;
+  color: rgb(218, 72, 72);
 }

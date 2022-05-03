@@ -1,0 +1,60 @@
+.price-block{
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  font-weight: 700px;
+  line-height: 20px;
+  font-family: Montserrat,sans-serif;
+
+  .price{
+    color: rgb(27, 56, 137);
+    font-size: 42px;
+  }
+
+  .euro {
+    color: rgb(27, 56, 137);
+    font-size: 32px;
+  }
+}
+
+.row {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.strong {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.button-cart button{
+  width: 100%;
+  height: 100%;
+}
+
+.button-buy button {
+  width: 100%;
+  height: 100%;
+}
+
+.details-product{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  div {
+    margin-top: 1rem;
+  }
+
+  .envio {
+    color: rgb(20, 157, 20);
+  }
+
+  .garantia {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 4px;
+    background-color: rgb(210, 234, 245);
+  }
+}
+
+

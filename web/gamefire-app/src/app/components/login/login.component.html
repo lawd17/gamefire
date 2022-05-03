@@ -1,24 +1,26 @@
 <div id="body-login">
     <main class="form-signin">
         <form>
-            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+            <h1 class="h3 mb-3 fw-normal">Por favor, identificate</h1>
 
             <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Email address</label>
+              <input type="email" id="floatingInput" class="form-control" [(ngModel)]="email" name="email" placeholder="Email" required="required" />
+                <label for="floatingInput">Email</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Password</label>
+              <input type="password" id="floatingPassword" class="form-control" [(ngModel)]="password" name="password" placeholder="Password" required="required" />
+                <label for="floatingPassword">Contraseña</label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" (click)="login()" type="submit">Login</button>
+            <div>
+              <span class="error" *ngIf="errorText" for="floatingPassword">{{errorText}}</span>
+            </div>
+            <div>
+              <p class="mb-0  text-center">No tienes cuenta?
+                <a routerLink="/register"  class="text-primary fw-bold">Registrate</a>
+              </p>
             </div>
 
-            <div class="checkbox mb-3">
-                <label>
-        <input type="checkbox" value="remember-me"> Remember me
-      </label>
-            </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-            <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
         </form>
     </main>
 </div>

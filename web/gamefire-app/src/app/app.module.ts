@@ -3,20 +3,43 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { SingupComponent } from './components/singup/singup.component';
+import { RegisterComponent } from './components/register/register.component';
+import { HomeComponent } from './components/home/home.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { CardsProductosComponent } from './components/home/cards-productos/cards-productos.component';
+import { DetalleProductoComponent } from './components/detalle-producto/detalle-producto.component';
+import { BuscarComponent } from './components/buscar/buscar.component';
+import { AddBarPipe } from './pipe/add-bar.pipe';
+import { CarritoComponent } from './components/carrito/carrito.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     LoginComponent,
-    FooterComponent
+    FooterComponent,
+    CarouselComponent,
+    SingupComponent,
+    RegisterComponent,
+    HomeComponent,
+    CardsProductosComponent,
+    DetalleProductoComponent,
+    BuscarComponent,
+    AddBarPipe,
+    CarritoComponent
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

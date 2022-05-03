@@ -1,0 +1,24 @@
+<div id="body-register">
+  <main class="form-register">
+      <form>
+          <h1 class="h3 mb-3 fw-normal">Registrarse</h1>
+
+          <div class="form-floating">
+            <input type="email" id="floatingInput" class="form-control" [(ngModel)]="email" name="email" placeholder="Email" required="required" />
+              <label for="floatingInput">Email</label>
+          </div>
+          <div class="form-floating">
+            <input type="password" id="floatingPassword" class="form-control" [(ngModel)]="password" name="password" placeholder="Password" required="required" />
+              <label for="floatingPassword">Contraseña</label>
+          </div>
+          <div class="form-floating">
+            <input type="password" id="floatingRepeatPassword" class="form-control" [(ngModel)]="confirmPassword" name="password" placeholder="Repeat the password" required="required" />
+              <label for="floatingRepeatPassword">Contraseña</label>
+          </div>
+          <button class="w-100 btn btn-lg btn-primary" (click)="register()" type="submit">Registrarse</button>
+          <div>
+            <span class="error" *ngIf="errorText" for="floatingPassword">{{errorText}}</span>
+          </div>
+        </form>
+  </main>
+</div>

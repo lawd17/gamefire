@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-4">
+      <!-- Filter sidenav-->
+        <div class="row" class="">
+          <strong>Filtros</strong>
+          <div class="col">
+            <label for="customRange2" class="form-label">Example range</label>
+            <input type="range" class="form-range" min="0" max="10000" id="customRange2" #price>
+            <div class="sc-gLonLh fXnnGa">
+              <input aria-label="minimum" class="sc-gwxJII cojgxj" value="9€">
+              <div class="sc-iMbuyt cyLBgz"></div>
+              <input aria-label="maximum" class="sc-gwxJII sc-cOwdLE cojgxj" value="9€">
+            </div>
+          </div>
+
+        </div>
+    </div>
+
+    <div class="list col-8">
+      <!-- Product List-->
+      <div class="producto-search" *ngFor="let producto of productos">
+        <a class="text-decoration-none text-black" routerLink="/producto/{{producto.id}}">
+          <img
+            src={{producto.imagen}}
+            class="card-img-top"
+            alt={{producto.nombre}}
+          />
+          <h6 class="text-muted">{{producto.nombre}}</h6>
+          <h5 class="">{{producto.precio_venta}}</h5>
+        </a>
+        </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div id="body-login">
+    <main class="form-signin">
+        <form>
+            <h1 class="h3 mb-3 fw-normal">Por favor, identificate</h1>
+
+            <div class="form-floating">
+              <input type="email" id="floatingInput" class="form-control" [(ngModel)]="email" name="email" placeholder="Email" required="required" />
+                <label for="floatingInput">Email</label>
+            </div>
+            <div class="form-floating">
+              <input type="password" id="floatingPassword" class="form-control" [(ngModel)]="password" name="password" placeholder="Password" required="required" />
+                <label for="floatingPassword">Contraseña</label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" (click)="login()" type="submit">Login</button>
+            <div>
+              <span class="error" *ngIf="errorText" for="floatingPassword">{{errorText}}</span>
+            </div>
+            <div>
+              <p class="mb-0  text-center">No tienes cuenta?
+                <a routerLink="/register"  class="text-primary fw-bold">Registrate</a>
+              </p>
+            </div>
+
+        </form>
+    </main>
+</div>

@@ -196,7 +196,7 @@ INSERT INTO producto
 VALUES (
     1,
     'Elden Ring',
-    'src/assets/img/eldenRing.png',
+    'assets/img/eldenRing.png',
     'Nuevo Juego de From
 Software',
     59.99,
@@ -208,7 +208,7 @@ VALUES (
     2,
     'The Word end width you final
 mix',
-    'src/assets/img/the_world_end_with_you_final_mix.png',
+    'assets/img/the_world_end_with_you_final_mix.png',
     'The Word end width you final
 mix","imagen":"\/assets\/img\/the_word_end_with_you.png","descripcion":"Aclamado por la cr\u00edtica en su lanzamiento
 en Nintendo DS, la aventura de rol y acci\u00f3n The World Ends With You recibe reedici\u00f3n en Nintendo Switch con
@@ -226,7 +226,7 @@ VALUES (
     3,
     'NEO: The World
 Ends With You',
-    'src/assets/img/neo_the_word_end_with_you.png',
+    'assets/img/neo_the_world_end_with_you.png',
     'NEO: The World Ends With You es un
 videojuego de rol y acci\u00f3n firmado por Square Enix continuaci\u00f3n de un cl\u00e1sico moderno del g\u00e9nero
 lanzado en 2007 para Nintendo DS, The World Ends with You. Sus responsables apuestan por llevar a los usuarios hasta las
@@ -245,7 +245,7 @@ VALUES (
     4,
     'Horizon: Forbidden
 West',
-    'src/assets/img/horizon_forbidden_wes.png',
+    'assets/img/horizon_forbidden_west.png',
     'Horizon: Forbidden West es la continuaci\u00f3n
 de las aventuras de Aloy para PS5 y PS4 tras la exitosa recepci\u00f3n de Horizon: Zero Dawn, y nos lleva a otra tierra
 de fantas\u00eda de manos de Guerrilla Entertainment autores, adem\u00e1s, de la saga Killzon',
@@ -258,7 +258,7 @@ VALUES (
     5,
     "King Arthur: Knight's
 Tale",
-    'src/assets/img/king_arthur.png',
+    'assets/img/king_arthur.png',
     "King Arthur: Knight's Tale es un videojuego de rol
 t\u00e1ctico con fuerte \u00e9nfasis en sus personajes que busca ofrecer un acercamiento moderno a una historia
 cl\u00e1sica de la mitolog\u00eda art\u00farica con toques de fantas\u00eda oscura",
@@ -270,7 +270,7 @@ INSERT INTO producto
 VALUES (
     6,
     'Hogwarts Legacy',
-    'src/assets/img/Hogwarts_Legacy.png',
+    'assets/img/Hogwarts_Legacy.png',
     'Disfruta del Hogwarts del siglo XIX. 
 Tu personaje es un alumno o alumna del famoso colegio que tiene la clave de un antiguo secreto que amenaza con destruir el mundo mágico. 
 Ahora puedes tomar el control de la acción y ser el centro de tu propia aventura en el mundo mágico.',
@@ -282,7 +282,7 @@ INSERT INTO producto
 VALUES (
     7,
     'Minecraft Starter Collection Refresh',
-    'src/assets/img/Minecraft_Starter_Collection_Refresh.png',
+    'assets/img/Minecraft_Starter_Collection_Refresh.png',
     'Tu nueva experiencia Minecraft está 
 aquí, en esta nueva y completa edición de tu juego favorito se incluye contenido extra como parte de la Bedrock Edition, así podrás disfrutar de un Minecraft con
  un mundo más grande, mejor y mucho más bonito. Descubre nuevas formas de jugar y compartir.',
@@ -294,7 +294,7 @@ INSERT INTO producto
 VALUES (
     8,
     'Leyendas de Pokemon: Arceus',
-    'src/assets/img/leyendas_pokemon_arceus.png',
+    'assets/img/leyendas_pokemon_arceus.png',
     'Celebra el 25 aniversario de Pokémon con una aventura 
 en el antiguo Sinnoh con un Pokemon completamente nuevo. En Leyendas Pokémon: Arceus, se mezclan las bases de los juegos de Pokémon anteriores con elementos propios
  de los juegos de acción y RPG. \n Tus aventuras se desarrollan en el majestuoso entorno natural de la región de Hisui, donde te encargarás de investigar Pokémon para 
@@ -307,7 +307,7 @@ INSERT INTO producto
 VALUES (
     9,
     'Kirby y La Tierra Olvidada',
-    'src/assets/img/kirby_la_tierra_olvidad.png',
+    'assets/img/kirby_la_tierra_olvidad.png',
     'Explora con Kirby y viaja hasta un mundo misterioso
  para descubrir que los Waddle Dees, los habitantes más comunes de Dream Land, están siendo secuestrados por la jauría. 
  Para rescatarlos Kirby emprenderá una aventura junto a Elfilin, un personaje que conoce en el nuevo mundo.',
@@ -319,7 +319,7 @@ INSERT INTO producto
 VALUES (
     10,
     'Resident Evil Village Edición Steelbook',
-    'src/assets/img/Resident_Evil_Village_Edición_Steelbook.png',
+    'assets/img/Resident_Evil_Village_Edición_Steelbook.png',
     'Años despues de la
  pesadilla, Ethan Winters ha conseguido cierta estabilidad y una vida normal con su familia. Una vida que no tardará en ser destruida por un héroe de antaño,
  Chris Redfield. Ambientado después de los terroríficos eventos del aclamado Resident Evil 7 Biohazard, la historia comienza con Ethan Winters y su mujer Mia 
@@ -334,7 +334,7 @@ INSERT INTO producto
 VALUES (
     11,
     'Controller Sony Dualshock 4 V2 Magma Red',
-    'src/assets/img/controller_sony_dualshock_v2_magma_red.png',
+    'assets/img/controller_sony_dualshock_v2_magma_red.png',
     'Toma el control de una nueva 
 generación de videojuegos con un mando inalámbrico DualShock 4 Magma Red rediseñado que pone en tus manos
  la mayor precisión en tus juegos de PlayStation 4',
@@ -346,7 +346,7 @@ INSERT INTO producto
 VALUES (
     12,
     'Mando Inalánbrico Dualsense Midnight Black',
-    'src/assets/img/mando_inalambrico_dualsense_midnight_black.png',
+    'assets/img/mando_inalambrico_dualsense_midnight_black.png',
     '',
     69.95,
     30,
@@ -356,7 +356,7 @@ INSERT INTO producto
 VALUES (
     13,
     'Corsair HS80 - RGB - Wireless - Negro - PC (Dolby Atmos)- PS4 - PS5 (Audio 3D) - Auriculares Gaming',
-    'src/assets/img/corsair_hs80_negro.png',
+    'assets/img/corsair_hs80_negro.png',
     '',
     149.99,
     100,
@@ -366,7 +366,7 @@ INSERT INTO producto
 VALUES (
     14,
     'Soporte de Carga para Mandos Joy-Con',
-    'src/assets/img/soporte_carga_joy_con.png',
+    'assets/img/soporte_carga_joy_con.png',
     'Acopla el Joy-Con izquierdo y el Joy-Con derecho a este soporte de carga y úsalo como un mando tradicional.
  A diferencia del soporte para mandos Joy-Con incluido con la consola Nintendo Switch, el soporte de carga permite recargar los Joy-Con mientras juegas, así que no tienes que preocuparte por quedarte sin batería.',
     24.95,
@@ -377,7 +377,7 @@ INSERT INTO producto
 VALUES (
     15,
     'Estacion de recarga Dualsense',
-    'src/assets/img/estacion_recarga_dualsense.png',
+    'assets/img/estacion_recarga_dualsense.png',
     'Acopla rápida y fácilmente hasta dos mandos inalámbricos DualSense con el diseño de acoplamiento sencillo de la estación de recarga. Los mandos se cargan tan rápido como al conectarlos a la PS5, de forma que puedes liberar puertos USB sin sacrificar el rendimiento.',
     29.95,
     15,
@@ -387,7 +387,7 @@ INSERT INTO producto
 VALUES (
     16,
     'Mando a distancia multimedia',
-    'src/assets/img/mando_distancia_multimedia.png',
+    'assets/img/mando_distancia_multimedia.png',
     'Navega cómodamente por el entretenimiento en tu consola PlayStation®5 con los intuitivos controles multimedia y para tu TV. ',
     29.99,
     15,
@@ -397,7 +397,7 @@ INSERT INTO producto
 VALUES (
     17,
     'Auriculares Xbox Edicion Especial 20 Aniversario',
-    'src/assets/img/auriculares_xbox_edicion_20_aniversario.png',
+    'assets/img/auriculares_xbox_edicion_20_aniversario.png',
     'Juega alto y claro con los Cascos estéreo de Xbox: Edición especial del 20º aniversario en color negro clásico con toques verdes que vuelven a los inicios y mucho más',
     64.95,
     35,
@@ -407,7 +407,7 @@ INSERT INTO producto
 VALUES (
     18,
     'Joy-Con (set Izda/Dcha) Azul Neón/Rojo Neón',
-    'src/assets/img/joy-con-izda_dcha_azul_neon_rojo_neon.png',
+    'assets/img/joy-con-izda_dcha_azul_neon_rojo_neon.png',
     'Un mando o dos, en vertical o en horizontal, control por movimiento o mediante botones… Con los nuevos mandos Joy-Con para Nintendo Switch tendrás flexibilidad total a la hora de jugar y descubrirás nuevas formas de interactuar que transformarán por completo tus experiencias de juego.',
     74.95,
     50,
@@ -417,7 +417,7 @@ INSERT INTO producto
 VALUES (
     19,
     'Set Funda + Protector Pantalla Switch OLED y Switch Estandar',
-    'src/assets/img/set_funda_protector_pantalla_switch_oled.png',
+    'assets/img/set_funda_protector_pantalla_switch_oled.png',
     'Este pack está fabricado con los mejores materiales para ofrecer una protección inmejorable para tu Nintendo Switch OLED o Estándar.  También dispones de dos protectores para tu consola, por si alguno se te parte, tener uno disponible de reserva.',
     19.95,
     100,
@@ -427,7 +427,7 @@ INSERT INTO producto
 VALUES (
     20,
     'Cable HDMI 2.1 8K Trust Ruza PS4-PS5-XSX-NSW',
-    'src/assets/img/cable_hdmi_trust_ruza_ps4_ps5_xsx_nsw.png',
+    'assets/img/cable_hdmi_trust_ruza_ps4_ps5_xsx_nsw.png',
     'Cable HDMI de velocidad ultraalta y de 1,8 m de longitud para disfrutar del gaming de próxima generación con altas resoluciones de hasta 8 K.',
     14.95,
     30,
@@ -438,7 +438,7 @@ INSERT INTO producto
 VALUES (
     21,
     'Xbox Series S + Xbox Game Pass',
-    'src/assets/img/xbox_serie_s_xbox_game_pass.png',
+    'assets/img/xbox_serie_s_xbox_game_pass.png',
     'Compra la consola Xbox Series S y llévate una suscripción de 3 meses de Xbox Game Pas para disfrutar del mundo digital a un precio increíble.',
     299.95,
     150,
@@ -448,7 +448,7 @@ INSERT INTO producto
 VALUES (
     22,
     'Game & Watch The Legend of Zelda',
-    'src/assets/img/game_and_watch_the_legend_of_zeld.png',
+    'assets/img/game_and_watch_the_legend_of_zeld.png',
     'Rejuega algunos de los juegos más emblemáticos de The Legend of Zelda en una consola inspirada en el estilo retro que es ideal tanto para jugar como para coleccionar. Se pueden jugar la versiones de los juegos en inglés o japonés.',
     49.95,
     50,
@@ -458,7 +458,7 @@ INSERT INTO producto
 VALUES (
     23,
     'Nintendo Switch Azul Neon Rojo Neon',
-    'src/assets/img/nintendo_switch_azul_neon_rojo_neon.png',
+    'assets/img/nintendo_switch_azul_neon_rojo_neon.png',
     'A la potencia de una consola doméstica se le une la movilidad de una consola portátil en Nintendo Switch, la nueva generación de Nintendo que ofrece emociones en casa para uno o varios jugadores y la posibilidad de jugar al mismo título donde quieras, cuando quieras y con quien quieras.',
     299.95,
     100,
@@ -468,7 +468,7 @@ INSERT INTO producto
 VALUES (
     24,
     'Nintendo Switch Lite Gris',
-    'src/assets/img/nintendo_switch_lite_gris.png',
+    'assets/img/nintendo_switch_lite_gris.png',
     'Una consola enfocada al juego portátil. Ideal para los jugadores que no se están quietos. Nintendo Switch Lite, la nueva incorporación a la familia Nintendo Switch, es una consola compacta, ligera y fácil de transportar, que cuenta con controles integrados.',
     219.95,
     50,
@@ -478,7 +478,7 @@ INSERT INTO producto
 VALUES (
     25,
     'Nintendo Switch Lite Amarillo',
-    'src/assets/img/nintendo_switch_lite_amarillo.png',
+    'assets/img/nintendo_switch_lite_amarillo.png',
     'Una consola enfocada al juego portátil. Ideal para los jugadores que no se están quietos. Nintendo Switch Lite, la nueva incorporación a la familia Nintendo Switch, es una consola compacta, ligera y fácil de transportar, que cuenta con controles integrados.',
     219.95,
     50,
@@ -489,7 +489,7 @@ INSERT INTO producto
 VALUES (
     26,
     'Figura POP Pokemon: Bulbasur',
-    'src/assets/img/figurar_pop_pokemon_bulbasur.png',
+    'assets/img/figurar_pop_pokemon_bulbasur.png',
     'Bulbasaur es un Pokémon de tipo planta/veneno introducido en la primera generación. Es uno de los Pokémon iniciales que pueden elegir los entrenadores que empiezan su aventura en la región Kanto, junto a Squirtle y Charmander (excepto en Pokémon Amarillo). Destaca por ser el primer Pokémon de la Pokédex Nacional y la en la Pokédex de Kanto.',
     14.95,
     100,
@@ -499,7 +499,7 @@ INSERT INTO producto
 VALUES (
     27,
     'Figura POP Pokemon: Charmander',
-    'src/assets/img/figurar_pop_pokemon_charmander.png',
+    'assets/img/figurar_pop_pokemon_charmander.png',
     "Charmander es un Pokémon de tipo fuego introducido en la primera generación. Es uno de los Pokémon iniciales que pueden elegir los entrenadores que empiezan su aventura en la región Kanto, junto a Bulbasaur y Squirtle, excepto en Pokémon Amarillo y Pokémon: Let's Go, Pikachu! y Pokémon: Let's Go, Eevee!",
     14.95,
     100,
@@ -509,7 +509,7 @@ INSERT INTO producto
 VALUES (
     28,
     'Figura One Piece Moneky D. Luffy',
-    'src/assets/img/figura_one_piece_monkeydluffy.png',
+    'assets/img/figura_one_piece_monkeydluffy.png',
     'Compra esta espectacular figura de Monkey D. Luffy. El orgulloso capitán de los Piratas del Sombrero de Paja y usuario de una de las frutas del diablo, Luffy sueña con ser el Rey de los Piratas encontrando el legendario tesoro One Piece.',
     29.95,
     50,
@@ -519,7 +519,7 @@ INSERT INTO producto
 VALUES (
     29,
     'Star Wars: Retro Game',
-    'src/assets/img/star_awrs_retro_game.png',
+    'assets/img/star_awrs_retro_game.png',
     'Revive tus mejores recuerdos de la galaxia con esta edición retro del juego Star Wars-Escape de la Estrella de la Muerte del juego original, editado por Kenner en el año 1977. Los verdaderos fans de Star Wars podrán volver a experimentar momentos tan épicos como ayudar a sus personajes favoritos a escapar del temible Estrella de la Muerte. Ayuda a Luke Skywalker, Han Solo, Chewbacca o la mismísima Princesa Leia a traer a la galaxia de nuevo la libertad.',
     9.95,
     50,
@@ -529,7 +529,7 @@ INSERT INTO producto
 VALUES (
     30,
     'Figurar POP My Hero Academia S8: Infinite Deku con Eri',
-    'src/assets/img/figura_poo_my_hero_academia_s8_infinite_deku_con_eri.png',
+    'assets/img/figura_poo_my_hero_academia_s8_infinite_deku_con_eri.png',
     '',
     14.95,
     100,

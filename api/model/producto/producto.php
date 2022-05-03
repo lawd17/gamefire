@@ -9,6 +9,7 @@ $idName = "id";
 $categoria = "id_categoria";
 $nombre = "nombre";
 $tableName = "producto";
+$limit = 10;
 
 function validarDatos($input){
   $message = "";
@@ -31,22 +32,25 @@ function validarDatos($input){
   listar todos los posts o solo uno
  */
 if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+  if ($_GET["limit"]) {
+    $limit = $_GET["limit"];
+  }
+
   if (isset($_GET[$idName])){
     $input = $_GET[$idName];
     $response = obtenerUno($dbConn,$tableName, $idName ,$input);
     ok_200();
-    header('Access-Control-Allow-Origin: http://site-a.com', false);
     echo json_encode($response);
     exit();
   } else if (isset($_GET[$categoria])){
     $input = $_GET[$categoria];
-    $response = obtenerUno($dbConn,$tableName, $idName ,$input);
+    $response = obtenerPorCategoria($dbConn, $tableName, $categoria, $input, $limit);
     ok_200();
     echo json_encode($response);
     exit();
   } else if (isset($_GET[$nombre])){
     $input = $_GET[$nombre];
-    $response = obtenerUno($dbConn,$tableName, $idName ,$input);
+    $response = obtenerPorNombre($dbConn, $tableName, $nombre, $input, $limit);
     ok_200();
     echo json_encode($response);
     exit();

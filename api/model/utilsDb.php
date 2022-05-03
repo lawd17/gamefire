@@ -82,7 +82,7 @@ function lanzarConsulta($dbConn, $input, $sql){
 
         return true;
       } catch (PDOException $exception) {
-        header("HTTP/1.1 500 Internal error" . $exception);
+        error_500($exception);
         exit();
       }
   }
@@ -96,8 +96,8 @@ function lanzarConsulta($dbConn, $input, $sql){
 
         return $response;
     } catch (PDOException $exception) {
-        header("HTTP/1.1 500 Internal error" . $exception);
-        exit();
+      error_500($exception);        
+      exit();
     }
   }
 
@@ -113,8 +113,8 @@ function lanzarConsulta($dbConn, $input, $sql){
 
         return $response;
     } catch (Exception $exception) {
-        header("HTTP/1.1 500 Internal error" . $exception);
-        exit();
+      error_500($exception);        
+      exit();
     }
   }
 
@@ -126,20 +126,48 @@ function lanzarConsulta($dbConn, $input, $sql){
 
         return $statement->fetchAll();
     } catch (PDOException $exception) {
-      header("HTTP/1.1 500 Internal error" . $exception);
+      error_500($exception); 
       exit();
     }
+  }
+
+  function obtenerPorCategoria($dbConn, $tableName, $columName, $input,  $limit = 10){
+    try {
+      $statement = $dbConn->prepare("SELECT * FROM $tableName where $columName=:$columName LIMIT $limit");
+      $statement->bindValue(":$columName", $input[$columName]);
+      $statement->execute();
+      $statement->setFetchMode(PDO::FETCH_ASSOC);
+
+      return $statement->fetchAll();
+  } catch (PDOException $exception) {
+    } catch (PDOException $exception) {
+      error_500($exception); 
+      exit();
+    }
+  }
+
+  function obtenerPorNombre($dbConn, $tableName, $columName, $value,  $limit = 10){
+    try {
+      $statement = $dbConn->prepare("SELECT * FROM $tableName WHERE $columName LIKE '%$value%' LIMIT $limit");
+      $statement->execute();
+      $statement->setFetchMode(PDO::FETCH_ASSOC);
+
+      return $statement->fetchAll();
+  } catch (PDOException $exception) {
+    error_500($exception); 
+    exit();
+  }
   }
 
 function obtenerUno($dbConn, $tableName, $columName, $input){
     try {
         $statement = $dbConn->prepare("SELECT * FROM $tableName where $columName=:$columName");
-        $statement->bindValue(":$columName", $input[$columName]);
+        $statement->bindValue(":$columName", $input);
         $statement->execute();
 
         return $statement->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $exception) {
-      header("HTTP/1.1 500 Internal error" . $exception);
+      error_500($exception);       
       exit();
     }
 }

@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioApiService } from 'src/app/services/usuario-api.service';
@@ -26,7 +27,26 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.userService.login(this.email, this.password);
+    this.errorText = "";
+
+    this.userService.login(this.email, this.password)
+    .subscribe(
+        data => {
+          if (data) {
+            this.userService.setLocalSotorageData(this.userService.userVarStorage, data)
+            this.userService.emailUserAutenticado = data
+            this.userService.autenticado = true;
+          } else {
+            this.errorText = "El email o password son incorrectos.";
+          }
+        },
+        (error:HttpErrorResponse) => {
+          //error en el formato de la contraseña o el correo
+          if (error.status == 400) {
+            this.errorText = "El email o password son incorrectos.";
+          }
+        });
+
   }
 
 }

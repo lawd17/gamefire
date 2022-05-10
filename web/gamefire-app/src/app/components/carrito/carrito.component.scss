@@ -1,0 +1,56 @@
+
+.table {
+  vertical-align: middle;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.product-img {
+  width: 6rem;
+}
+
+.title-precio-final{
+
+}
+
+.value-precio-final{
+
+}
+
+.item {
+  .cart-product-remove{
+    visibility: hidden;
+  }
+}
+
+.item:hover {
+  .cart-product-remove{
+    visibility: visible;
+  }
+}
+
+.cart-product-remove:hover{
+  border: 1px solid rgb(99, 174, 221);
+  cursor: pointer;
+  visibility: visible;
+}
+
+.mover_derecha {
+  float: right!important;
+}
+
+.info_pago{
+  margin: 2rem;
+  border-top: 1px solid black;
+}
+
+.info_total {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+
+  margin-top: 2rem;
+}
+
+.btn-pedido{
+  margin-top: 2rem;
+  width: 100%;
+}

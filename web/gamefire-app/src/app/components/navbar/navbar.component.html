@@ -4,7 +4,7 @@
 
   <div class="container">
     <!-- Navbar brand -->
-    <a class="navbar-brand" href="#"><img id="GameFire-logo"
+    <a class="navbar-brand" routerLink="/home"><img id="GameFire-logo"
         src="" alt="GameFire Logo"
         draggable="false" height="30" /></a>
 
@@ -20,7 +20,7 @@
       <!-- Left links -->
       <ul class="navbar-nav me-3">
         <li class="nav-item">
-          <a class="nav-link active d-flex align-items-center" aria-current="page" href="#"><i
+          <a class="nav-link active d-flex align-items-center" aria-current="page" routerLink="/home"><i
               class="fas fa-bars pe-2"></i>Menu</a>
         </li>
       </ul>
@@ -28,7 +28,7 @@
 
       <form class="d-flex align-items-center w-100 form-search">
         <div class="input-group">
-          <input type="search" class="form-control" placeholder="Search" aria-label="Search" #search/>
+          <input type="search" class="form-control" placeholder="Search" aria-label="Search" routerLink="/buscar/{{search.value | addBar}}" #search/>
         </div>
       </form>
 
@@ -51,7 +51,7 @@
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <li><a class="dropdown-item" routerLink="/perfil">Mi perfil</a></li>
             <li><a class="dropdown-item" routerLink="/carrito">Carrito</a></li>
-            <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+            <li><a class="dropdown-item" href="#" (click)="logout()">Logout</a></li>
           </ul>
         </li>
       </ul>

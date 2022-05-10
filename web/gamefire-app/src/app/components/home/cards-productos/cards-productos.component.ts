@@ -3,6 +3,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { Categoria } from 'src/app/model/data/Categoria';
 import { Producto } from 'src/app/model/data/Producto';
 import { ProductosApiService } from 'src/app/services/productos-api.service';
+import { UsuarioApiService } from 'src/app/services/usuario-api.service';
 
 @Component({
   selector: 'app-cards-productos',
@@ -13,7 +14,9 @@ export class CardsProductosComponent implements OnInit {
   @Input() categoria!: Categoria; // decorate the property with @Input()
   public productos: Producto[] = [];
 
-  constructor(private router: AppRoutingModule, public poductosService: ProductosApiService) {
+  constructor(private router: AppRoutingModule,
+    private poductosService: ProductosApiService,
+    private usuarioService: UsuarioApiService) {
 
   }
 
@@ -43,7 +46,7 @@ export class CardsProductosComponent implements OnInit {
   }
 
   obtenerTodosProductosPorCategoria() {
-      this.poductosService.getPorductosForCategory(this.categoria).subscribe(data => {
+      this.poductosService.getPorductosForCategory(this.categoria, 10).subscribe(data => {
         data.forEach(element => {
           let id = parseInt(element.id) ;
           let nombre = element.nombre;

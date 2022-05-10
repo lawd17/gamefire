@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerTodasCategorias();
   }
-
+  
   obtenerTodasCategorias(){
     this.categoriaService.obtenerTodasCategoria()
     .subscribe(data => {

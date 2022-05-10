@@ -18,27 +18,18 @@ html,#body-register {
   margin: auto;
 }
 
-.form-register .checkbox {
-  font-weight: 400;
-}
 
 .form-register .form-floating:focus-within {
   z-index: 2;
 }
 
-.form-register input[type="email"] {
+.form-register {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.form-register input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
 .error {
-  font-size: smaller;
-  color: rgb(218, 72, 72);
+font-size: smaller;
+color: rgb(218, 72, 72);
 }

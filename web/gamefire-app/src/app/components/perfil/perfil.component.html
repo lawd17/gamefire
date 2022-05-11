@@ -1,0 +1,198 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <ul class="list-group">
+        <a id="misDatos" [class.active]="misDatos.id === this.opcionSeleccionada"
+          class="list-group-item list-group-item-action" (click)="seleccionado(misDatos)" #misDatos> Mis
+          datos<span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-caret-right" viewBox="0 0 16 16">
+              <path
+                d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z" />
+            </svg></span></a>
+        <a id="miDireccion" [class.active]="miDireccion.id === this.opcionSeleccionada"
+          class="list-group-item list-group-item-action" (click)="seleccionado(miDireccion)" #miDireccion>Direccion
+          <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-caret-right" viewBox="0 0 16 16">
+              <path
+                d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z" />
+            </svg></span> </a>
+        <a id="miMetodoPago" [class.active]="miMetodoPago.id === this.opcionSeleccionada"
+          class="list-group-item list-group-item-action" (click)="seleccionado(miMetodoPago)" #miMetodoPago>Metodo de
+          pago <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-caret-right" viewBox="0 0 16 16">
+              <path
+                d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z" />
+            </svg></span></a>
+        <a id="misPedidos" [class.active]="misPedidos.id === this.opcionSeleccionada"
+          class="list-group-item list-group-item-action" (click)="seleccionado(misPedidos)" #misPedidos>Mis pedidos
+          <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-caret-right" viewBox="0 0 16 16">
+              <path
+                d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z" />
+            </svg></span></a>
+      </ul>
+    </div>
+    <div class="info col-md-5">
+      <div *ngIf="misDatos.id === this.opcionSeleccionada">
+        <h3 class="fw-normal mb-5" style="color: #484849;">Datos</h3>
+        <form action="">
+
+          <div class="mb-4 pb-2">
+            <label class="form-label" for="email">Email</label>
+            <input type="text" id="email" class="form-control form-control-lg" [(ngModel)]="usuario.email" name="email"
+              [readonly]="this.readonly" />
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-4 pb-2">
+              <label class="form-label" for="nombre">Nombre</label>
+              <input type="text" id="nombre" class="form-control form-control-lg" [(ngModel)]="usuario.nombre"
+                name="nombre" [readonly]="readonly" />
+            </div>
+            <div class="col-md-6 mb-4 pb-2">
+              <label class="form-label" for="codigo_postal">Apellidos</label>
+              <input type="text" id="apellidos" class="form-control form-control-lg" [(ngModel)]="usuario.apellidos"
+                name="apellidos" [readonly]="readonly" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-4 pb-2">
+              <label class="form-label" for="username">Username</label>
+              <input type="text" id="username" class="form-control form-control-lg" [(ngModel)]="usuario.username"
+                name="username" [readonly]="readonly" />
+            </div>
+            <div class="col-md-6 mb-4 pb-2">
+              <label class="form-label" for="codigo_postal">Password</label>
+              <input type="password" id="password" class="form-control form-control-lg" [(ngModel)]="usuario.password"
+                name="password" [readonly]="readonly" />
+            </div>
+          </div>
+
+          <div class="mb-4 pb-2">
+            <label class="form-label" for="telefono">Telefono</label>
+            <input type="text" id="telefono" class="form-control form-control-lg" [(ngModel)]="usuario.telefono"
+              name="telefono" [readonly]="readonly" />
+          </div>
+
+          <button *ngIf="readonly" class="btn btbtn btn-secondary" (click)="desactivarReadonly()">Editar</button>
+          <button *ngIf="!readonly" class="btn btbtn btn-secondary" (click)="editarUsuario()">Guardar</button>
+          <div class="error">{{textError}}</div>
+          <div class="message">{{textMessage}}</div>
+        </form>
+      </div>
+
+      <div *ngIf="miDireccion.id === this.opcionSeleccionada">
+        <h3 class="fw-normal mb-5" style="color: #484849;">Dirección de facturación</h3>
+        <form action="">
+          <div class="mb-4 pb-2">
+            <div class="form-outline">
+              <label class="form-label" for="direccion">Direccion facturación</label>
+              <input type="text" id="direccion" class="form-control form-control-lg" [(ngModel)]="direccion.direccion"
+                name="direccion" [readonly]="readonly" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-4 pb-2">
+              <div class="form-outline">
+                <label class="form-label" for="ciudad">Ciudad</label>
+                <input type="text" id="ciudad" class="form-control form-control-lg" [(ngModel)]="direccion.ciudad"
+                  name="ciudad" [readonly]="readonly" />
+              </div>
+            </div>
+            <div class="col-md-6 mb-4 pb-2">
+              <div class="form-outline">
+                <label class="form-label" for="codigo_postal">Código postal</label>
+
+                <input type="text" id="codigo_postal" class="form-control form-control-lg"
+                  [(ngModel)]="direccion.codigo_postal" name="codigo_postal" [readonly]="readonly" />
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-4 pb-2">
+              <div class="form-outline">
+                <label class="form-label" for="pais">Pais</label>
+                <input type="text" id="pais" class="form-control form-control-lg" [(ngModel)]="direccion.pais"
+                  name="pais" [readonly]="readonly" />
+              </div>
+            </div>
+          </div>
+          <button *ngIf="readonly" class="btn btbtn btn-secondary" (click)="desactivarReadonly()">Editar</button>
+          <button *ngIf="!readonly" class="btn btbtn btn-secondary" (click)="editarDireccion()">Guardar</button>
+          <div class="error">{{textError}}</div>
+          <div class="message">{{textMessage}}</div>
+        </form>
+
+      </div>
+      <div *ngIf="miMetodoPago.id === this.opcionSeleccionada">
+        <h2 class="fw-normal mb-1" style="color: #484849;">Metodo pago</h2>
+        <form action="">
+          <label class="form-label" for="numero_cuenta">Tipo pago</label>
+          <div class="mb-4 pb-2">
+            <div class="form-check" (change)="termsChange($event)">
+              <input class="form-check-input" type="radio" [checked]="validarTipoPago('CREDIT_CARD')"
+                name="payment-platform" value="CREDIT_CARD" [disabled]="readonly">
+              <label class="form-check-label">Tarjeta crédito/débito</label>
+            </div>
+            <div class="form-check" (change)="termsChange($event)">
+              <input class="form-check-input" type="radio" [checked]="validarTipoPago('PAYPAL')" name="payment-platform"
+                value="PAYPAL" [disabled]="readonly">
+              <label class="form-check-label" for="flexRadioDefault2">
+                Paypal<span class="fees">(+0.15€)</span>
+              </label>
+            </div>
+            <div class="form-check" (change)="termsChange($event)">
+              <input class="form-check-input" type="radio" [checked]="validarTipoPago('SOFORT')" name="payment-platform"
+                value="SOFORT" [disabled]="readonly">
+              <label class="form-check-label">Sofort<span class="fees">(+0.13€)</span></label>
+            </div>
+            <div class="form-check" (change)="termsChange($event)">
+              <input class="form-check-input" type="radio" [checked]="validarTipoPago('PAYSAFECARD')"
+                name="payment-platform" value="PAYSAFECARD" [disabled]="readonly">
+              <label class="form-check-label" for="flexRadioDefault2">
+                Paysafecard<span class="fees">(+0.64€)</span>
+              </label>
+            </div>
+          </div>
+
+          <div *ngIf="validarTipoPago('CREDIT_CARD')">
+            <div class="mb-4 pb-2">
+              <label class="form-label" for="numero_cuenta">Número de tarjeta</label>
+              <input class="form-control" type="text" id="numero_cuenta" [(ngModel)]="metodoPago.numero_cuenta"
+                name="numero_cuenta" placeholder="0123456789123456" [readonly]="readonly" />
+            </div>
+
+            <div class="mb-4 pb-2">
+              <label class="form-label" for="titular">Titular de la tarjeta</label>
+              <input class="form-control" type="text" id="titular" [(ngModel)]="metodoPago.titular" name="titular"
+                [readonly]="readonly">
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-4 pb-2">
+                <label class="form-label" for="expiracion">Fecha de caducidad</label>
+                <input class="form-control" type="text" id="expiracion" [(ngModel)]="metodoPago.expiracion"
+                  name="expiracion" placeholder="mm/aa" [readonly]="readonly">
+              </div>
+              <div class="col-md-6 mb-4 pb-2">
+                <label class="form-label" for="cvv">CVV</label>
+                <input class="form-control" type="text" id="cvv" maxlength="3" [(ngModel)]="metodoPago.cvv" name="cvv"
+                 placeholder="000" [readonly]="this.readonly">
+              </div>
+            </div>
+          </div>
+
+          <button *ngIf="readonly" class="btn btbtn btn-secondary" (click)="desactivarReadonly()">Editar</button>
+          <button *ngIf="!readonly" class="btn btbtn btn-secondary" (click)="editarMetodoPago()">Guardar</button>
+          <div class="error">{{textError}}</div>
+          <div class="message">{{textMessage}}</div>
+        </form>
+
+      </div>
+      <div *ngIf="misPedidos.id === this.opcionSeleccionada">
+        misPedidos
+      </div>
+    </div>
+  </div>
+</div>

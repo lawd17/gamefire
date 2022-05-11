@@ -5,6 +5,7 @@ import { CarritoComponent } from './components/carrito/carrito.component';
 import { DetalleProductoComponent } from './components/detalle-producto/detalle-producto.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: "buscar/:nombre", component: BuscarComponent},
   {path: "login", component: LoginComponent, pathMatch: "full" },
   {path: "register", component: RegisterComponent, pathMatch: "full" },
-  {path: "carrito", component: CarritoComponent, pathMatch: "full" }
+  {path: "carrito", component: CarritoComponent, pathMatch: "full" },
+  {path: "perfil", component: PerfilComponent, pathMatch: "full" },
 ];
 
 @NgModule({

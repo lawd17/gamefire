@@ -17,4 +17,9 @@ export class CategoriaApiService {
     console.log('getCategoria '+ this.baseURL)
     return this.http.get<apiCategoria[]>(this.baseURL)
   }
+
+  public getCategoria(id: number): Observable<apiCategoria>{
+    console.log('getCategoria '+ this.baseURL)
+    return this.http.get<apiCategoria>(this.baseURL + "?id=" + id)
+  }
 }

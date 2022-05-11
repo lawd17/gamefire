@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Producto } from 'src/app/model/data/Producto';
 import { Location } from '@angular/common';
 import { ProductosApiService } from 'src/app/services/productos-api.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-buscar',
@@ -11,13 +12,15 @@ import { ProductosApiService } from 'src/app/services/productos-api.service';
 })
 export class BuscarComponent implements OnInit {
   productos: Producto[] = [];
-
+  textError = ""
+  
   constructor(public productoService: ProductosApiService, private route: ActivatedRoute, private location: Location) {
   }
 
   ngOnInit(): void {
     this.obtenerTodosProductosPorNombre();
   }
+
 
   obtenerTodosProductosPorNombre() {
       var nombre = String(this.route.snapshot.paramMap.get('nombre'));
@@ -34,7 +37,12 @@ export class BuscarComponent implements OnInit {
           let stock = parseInt(element.stock);
           let id_categoria = parseInt(element.id_categoria);
           this.productos.push(new Producto(id, nombre, imagen, descripcion, precio_venta, stock, id_categoria));
-        });
+        })
+      },
+      (error:HttpErrorResponse) => {
+        if (error.status == 400) {
+          this.textError = "Error en contra la API"
+        }
       });
     }
 }

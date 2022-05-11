@@ -25,14 +25,14 @@ export class ProductosApiService {
     return this.http.get<apiProducto>(this.baseURL + "?id=" + id);
   }
 
-  public getPorductosForCategory(categoria: Categoria){
+  public getPorductosForCategory(categoria: Categoria, limit: number = 10){
     console.log('getProductoPorCategoria '+ this.baseURL);
-    return this.http.get<apiProducto[]>(this.baseURL + "?id_categoria=" + categoria.id);
+    return this.http.get<apiProducto[]>(this.baseURL + "?id_categoria=" + categoria.id + "&limit=" + limit);
   }
 
-  public getPorductosForNombre(nombre: string){
+  public getPorductosForNombre(nombre: string, limit: number = 30){
     console.log('getProductosPorNombre '+ this.baseURL);
-    return this.http.get<apiProducto[]>(this.baseURL + "?nombre=" + nombre);
+    return this.http.get<apiProducto[]>(this.baseURL + "?nombre=" + nombre + "&limit=" + limit);
   }
 
 }

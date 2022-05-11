@@ -5,16 +5,15 @@ include "../config.php";
 include "../utilsDb.php";
 include "../errors.php";
 $dbConn =  connect($db);
-$idName = "id";
-$categoria = "id_categoria";
-$nombre = "nombre";
-$tableName = "producto";
+$fieldId = "id";
+$fieldIdCategorias = "id_categoria";
+$fieldNombre = "nombre";
+$tableName = "Productos";
 $limit = 10;
 
 function validarDatos($input){
   $message = "";
 
-  $message = evaluarParametro($input,"id", "/^[A-Za-z0-9]{1,50}$/", $message);
   $message = evaluarParametro($input,"nombre", "/^[A-ZÁÉÍÓÚa-zñáéíóú\s]*$/", $message);
   $message = evaluarParametro($input,"imagen", "/^[\w/\.]+(\s|)$/", $message);
   $message = evaluarParametro($input,"precio_venta", "/^[\d]+(\.\,[\d]{1,4})?$/", $message);
@@ -28,32 +27,41 @@ function validarDatos($input){
   }
 }
 
+$dbConn =  connect($db);
+$fieldId = "id";
+$fieldIdCategorias = "id_categoria";
+$fieldNombre = "nombre";
+$tableName = "Productos";
+$limit = 10;
 /*
   listar todos los posts o solo uno
  */
 if ($_SERVER['REQUEST_METHOD'] == 'GET'){
   if ($_GET["limit"]) {
-    $limit = $_GET["limit"];
+    $limit = intval($_GET["limit"]);
   }
 
-  if (isset($_GET[$idName])){
-    $input = $_GET[$idName];
-    $response = obtenerUno($dbConn,$tableName, $idName ,$input);
+  if (isset($_GET[$fieldId])){
+    $input = $_GET[$fieldId];
+    $response = obtenerUno($dbConn,$tableName, $fieldId ,$input);
     ok_200();
     echo json_encode($response);
     exit();
-  } else if (isset($_GET[$categoria])){
-    $input = $_GET[$categoria];
-    $response = obtenerPorCategoria($dbConn, $tableName, $categoria, $input, $limit);
+
+  } else if (isset($_GET[$fieldIdCategorias])){
+    $input = $_GET[$fieldIdCategorias];
+    $response = obtenerPorCategoria($dbConn, $tableName, $fieldIdCategorias, $input, $limit);
     ok_200();
     echo json_encode($response);
     exit();
-  } else if (isset($_GET[$nombre])){
-    $input = $_GET[$nombre];
-    $response = obtenerPorNombre($dbConn, $tableName, $nombre, $input, $limit);
+
+  } else if (isset($_GET[$fieldNombre])){
+    $input = $_GET[$fieldNombre];
+    $response = obtenerPorNombre($dbConn, $tableName, $fieldNombre, $input, $limit);
     ok_200();
     echo json_encode($response);
     exit();
+
   } else {
     $response = obtenerTodos($dbConn,$tableName);
     ok_200();
@@ -61,13 +69,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
     exit();
   }
 }
-
+/*
 // Crear un nuevo post
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-  $input = $_POST;
+  $input = obtenerDatosEntrada();
   validarDatos($input);
 
-  $response = insertar($dbConn, $tableName, $input);
+  $existe = existe($dbConn, $tableName, $fieldId, $input[$fieldId]);
+
+  if ($existe) {
+    $response = actualizar($fieldId, $dbConn, $tableName, $input);
+  } else {
+    $response = insertar($dbConn, $tableName, $input);
+  }
 
   ok_200();
   echo json_encode($response);
@@ -97,3 +111,8 @@ ok_200();
 echo json_encode($response);
 exit;
 }
+
+*/
+
+header(error_400() . $message);
+exit;

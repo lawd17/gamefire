@@ -56,10 +56,10 @@ export class UsuarioApiService {
   logout() {
     this.removeLocalStorageData(this.userVarStorage)
   }
-  
+
   //TODO MIRAR SI ESTAS DOS FUNCIONES TIENEN SENTIDO
-  postUser(usuario: Usuario): Observable<boolean> {
-    return this.http.post<boolean>(this.baseUserUrl, JSON.stringify(usuario))
+  postUser(usuario: Usuario): Observable<string> {
+    return this.http.post<string>(this.baseUserUrl, JSON.stringify(usuario))
   }
 
   registerUser(usuario: FormGroup): Observable<boolean> {
@@ -123,5 +123,10 @@ export class UsuarioApiService {
 
   removeLocalStorageData(key: string) {
     localStorage.removeItem(key)
+  }
+
+  removeCartLocalStorage(){
+    this.removeLocalStorageData(this.emailUserAutenticado);
+    this.reloadCartStorage();
   }
 }

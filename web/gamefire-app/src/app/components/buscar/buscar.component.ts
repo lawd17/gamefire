@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Producto } from 'src/app/model/data/Producto';
-import { Location } from '@angular/common';
 import { ProductosApiService } from 'src/app/services/productos-api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -11,22 +9,23 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./buscar.component.scss']
 })
 export class BuscarComponent implements OnInit {
+
   productos: Producto[] = [];
   textError = ""
-  
-  constructor(public productoService: ProductosApiService, private route: ActivatedRoute, private location: Location) {
+  nameActual: string = "";
+  constructor(public productoService: ProductosApiService) {
   }
 
   ngOnInit(): void {
-    this.obtenerTodosProductosPorNombre();
+    this.nameActual = this.productoService.searchName;
   }
 
 
-  obtenerTodosProductosPorNombre() {
-      var nombre = String(this.route.snapshot.paramMap.get('nombre'));
-      nombre = nombre.replace("-", " ");
+  obtenerTodosProductosPorNombre(name: string) {
+      //var nombre = String(this.route.snapshot.paramMap.get('nombre'));
+      //nombre = nombre.replace("-", " ");
 
-      this.productoService.getPorductosForNombre(nombre)
+      this.productoService.getPorductosForNombre(name)
       .subscribe(data => {
         data.forEach(element => {
           let id = parseInt(element.id);

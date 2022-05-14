@@ -125,6 +125,7 @@
         </form>
 
       </div>
+
       <div *ngIf="miMetodoPago.id === this.opcionSeleccionada">
         <h2 class="fw-normal mb-1" style="color: #484849;">Metodo pago</h2>
         <form action="">
@@ -190,9 +191,22 @@
         </form>
 
       </div>
-      <div *ngIf="misPedidos.id === this.opcionSeleccionada">
-        misPedidos
-      </div>
+    </div>
+    <div *ngIf="misPedidos.id === this.opcionSeleccionada" class="row">
+      <h4>Mis Pedidos</h4>
+      <div *ngFor="let pedido of pedidos" class="col-12 col-md-6">
+          <div class="card m-2">
+            <a routerLink="/detallePedido/{{pedido.id}}" class="text-decoration-none text-black">
+              <div class="card-body">
+                <h5 class="card-title">ID: {{pedido.id}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Fecha: {{pedido.fecha}}</h6>
+                <span class="card-text">
+                  {{ pedido.total | currency : 'EUR':'symbol':'':'es'}} - <strong>{{pedido.impuesto}} incluido</strong>
+                </span>
+              </div>
+            </a>
+          </div>
+        </div>
     </div>
   </div>
 </div>

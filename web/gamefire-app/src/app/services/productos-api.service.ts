@@ -9,6 +9,8 @@ import { Producto } from '../model/data/Producto';
   providedIn: 'root'
 })
 export class ProductosApiService {
+  searchProductos: Producto[] = [];
+  searchName: string = "";
 
   baseURL: string = "http://192.168.1.43/API/gamefire/api/model/producto/producto.php";
 

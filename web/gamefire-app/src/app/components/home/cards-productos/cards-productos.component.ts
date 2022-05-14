@@ -22,7 +22,6 @@ export class CardsProductosComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerTodosProductos();
-
   }
 
   obtenerTodosProductos() {

@@ -6,29 +6,33 @@
 
         <div class="mb-4 pb-2">
           <div class="form-outline">
-            <input type="text" id="formDireccion" class="form-control form-control-lg"/>
-            <label class="form-label" for="formDireccion">Direccion facturación</label>
+            <label class="form-label" for="direccion">Direccion facturación</label>
+            <input type="text" id="direccion" class="form-control form-control-lg" [(ngModel)]="direccion.direccion"
+              name="direccion"/>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-6 mb-4 pb-2">
             <div class="form-outline">
-              <input type="text" id="formCiudad" class="form-control form-control-lg" />
-              <label class="form-label" for="formCiudad">Ciudad</label>
+              <label class="form-label" for="ciudad">Ciudad</label>
+              <input type="text" id="ciudad" class="form-control form-control-lg" [(ngModel)]="direccion.ciudad"
+                name="ciudad" />
             </div>
           </div>
           <div class="col-md-6 mb-4 pb-2">
             <div class="form-outline">
-              <input type="text" id="formCodigoPostal" class="form-control form-control-lg" />
-              <label class="form-label" for="formCodigoPostal">Código postal</label>
+              <label class="form-label" for="codigo_postal">Código postal</label>
+              <input type="text" id="codigo_postal" class="form-control form-control-lg"
+                [(ngModel)]="direccion.codigo_postal" name="codigo_postal" />
             </div>
           </div>
 
           <div class="col-md-6 mb-4 pb-2">
             <div class="form-outline">
-              <input type="text" id="formCodigoPais" class="form-control form-control-lg" />
-              <label class="form-label" for="formCodigoPais">Pais</label>
+              <label class="form-label" for="codigo_postal">Código postal</label>
+              <input type="text" id="codigo_postal" class="form-control form-control-lg"
+                [(ngModel)]="direccion.codigo_postal" name="codigo_postal" />
             </div>
           </div>
         </div>
@@ -37,50 +41,59 @@
 
         <div class="mb-4 pb-2">
           <div class="form-check" (change)="termsChange($event)">
-            <input class="form-check-input" type="radio" name="payment-platform" value="CREDIT_CARD">
-            <label class="form-check-label">Tarjeta crédito/débito</label>
+            <input class="form-check-input" type="radio" [checked]="validarTipoPago('CREDIT_CARD')"
+            name="payment-platform" value="CREDIT_CARD">
+          <label class="form-check-label">Tarjeta crédito/débito</label>
           </div>
           <div class="form-check" (change)="termsChange($event)">
-            <input class="form-check-input" type="radio" name="payment-platform" value="PAYPAL">
-            <label class="form-check-label" for="flexRadioDefault2">
-              Paypal<span class="fees">(+0.15€)</span>
-            </label>
+            <input class="form-check-input" type="radio" [checked]="validarTipoPago('PAYPAL')" name="payment-platform"
+            value="PAYPAL">
+          <label class="form-check-label" for="flexRadioDefault2">
+            Paypal<span class="fees">(+0.15€)</span>
+          </label>
           </div>
           <div class="form-check" (change)="termsChange($event)">
-            <input class="form-check-input" type="radio" name="payment-platform" value="SOFORT">
-            <label class="form-check-label">Sofort<span class="fees">(+0.13€)</span></label>
+            <input class="form-check-input" type="radio" [checked]="validarTipoPago('SOFORT')" name="payment-platform"
+            value="SOFORT">
+          <label class="form-check-label">Sofort<span class="fees">(+0.13€)</span></label>
           </div>
           <div class="form-check" (change)="termsChange($event)">
-            <input class="form-check-input" type="radio" name="payment-platform" value="PAYSAFECARD">
-            <label class="form-check-label" for="flexRadioDefault2">
-              Paysafecard<span class="fees">(+0.64€)</span>
-            </label>
+            <input class="form-check-input" type="radio" [checked]="validarTipoPago('PAYSAFECARD')"
+            name="payment-platform" value="PAYSAFECARD">
+          <label class="form-check-label" for="flexRadioDefault2">
+            Paysafecard<span class="fees">(+0.64€)</span>
+          </label>
           </div>
         </div>
 
-        <div *ngIf="metodoPagoSelected == 'CREDIT_CARD'">
+        <div *ngIf="validarTipoPago('CREDIT_CARD')">
           <div class="mb-4 pb-2">
-              <label class="form-label" for="formNumeroCuenta">Número de tarjeta</label>
-              <input class="form-control" type="text" id="formNumeroCuenta" placeholder="•••• •••• •••• ••••" />
+            <label class="form-label" for="numero_cuenta">Número de tarjeta</label>
+            <input class="form-control" type="text" id="numero_cuenta" [(ngModel)]="metodoPago.numero_cuenta"
+              name="numero_cuenta" placeholder="0123456789123456" />
           </div>
 
           <div class="mb-4 pb-2">
-              <label class="form-label" for="formNumeroCuenta">Titular de la tarjeta</label>
-              <input class="form-control" type="text" id="formTitular" placeholder="J. Smith">
+            <label class="form-label" for="titular">Titular de la tarjeta</label>
+            <input class="form-control" type="text" id="titular" [(ngModel)]="metodoPago.titular" name="titular">
           </div>
 
           <div class="row">
             <div class="col-md-6 mb-4 pb-2">
-                <label class="form-label" for="formFecha">Fecha de caducidad</label>
-                <input class="form-control" type="text" id="formFecha" placeholder="MM / YY">
+              <label class="form-label" for="expiracion">Fecha de caducidad</label>
+              <input class="form-control" type="text" id="expiracion" [(ngModel)]="metodoPago.expiracion"
+                name="expiracion" placeholder="mm/aa" >
             </div>
             <div class="col-md-6 mb-4 pb-2">
-              <label class="form-label" for="formCVV">CVV</label>
-              <input class="form-control" type="text" id="formCVV" maxlength="3" placeholder="CVC" autocomplete="off">
+              <label class="form-label" for="cvv">CVV</label>
+              <input class="form-control" type="text" id="cvv" maxlength="3" [(ngModel)]="metodoPago.cvv" name="cvv"
+               placeholder="000">
             </div>
           </div>
         </div>
-        <a *ngIf="carrito.length != 0" class="btn-pedido btn btn-warning btn-lg">
+        <div class="textError">{{textError}}</div>
+        <div class="okMessage">{{okMessage}}</div>
+        <a *ngIf="carrito.length != 0" class="btn-pedido btn btn-warning btn-lg" (click)="realizarPedido()">
           Pagar <span>{{ total | currency : 'EUR':'symbol':'':'es'}}</span>
         </a>
       </div>

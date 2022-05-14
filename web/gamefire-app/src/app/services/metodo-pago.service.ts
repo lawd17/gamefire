@@ -20,8 +20,8 @@ export class MetodoPagoService {
     return this.http.get<apiMetodoPago>(this.baseURL + "?id_usuario=" + id);
   }
 
-  postMetodoPago(metodoPago: MetodoPago): Observable<boolean> {
-    return this.http.post<boolean>(this.baseURL, JSON.stringify(metodoPago))
+  postMetodoPago(metodoPago: MetodoPago): Observable<string> {
+    return this.http.post<string>(this.baseURL, JSON.stringify(metodoPago))
   }
 
 }

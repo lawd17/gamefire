@@ -12,6 +12,7 @@ import { UsuarioApiService } from 'src/app/services/usuario-api.service';
 
 export class NavbarComponent implements OnInit {
   searchValue: string = "";
+
   constructor(private userService: UsuarioApiService,
     private productoService: ProductosApiService,
     private router: Router) {}
@@ -20,6 +21,11 @@ export class NavbarComponent implements OnInit {
   }
 
   ngDoCheck(): void {
+
+    if (this.searchValue != this.productoService.searchName) {
+      this.productoService.searchName = this.searchValue;
+      this.router.navigate(['/', 'buscar'])
+    }
 
   }
 

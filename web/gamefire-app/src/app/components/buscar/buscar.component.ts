@@ -11,15 +11,36 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class BuscarComponent implements OnInit {
 
   productos: Producto[] = [];
-  textError = ""
+  message = ""
   nameActual: string = "";
+  spinner = false;
   constructor(public productoService: ProductosApiService) {
   }
 
   ngOnInit(): void {
     this.nameActual = this.productoService.searchName;
+    this.obtenerTodosProductosPorNombre(this.nameActual);
   }
 
+  ngDoCheck(): void {
+    if (this.nameActual != this.productoService.searchName) {
+      this.productos = [];
+      this.nameActual = this.productoService.searchName;
+      this.obtenerTodosProductosPorNombre(this.nameActual);
+    }
+
+    if (this.productos.length == 0) {
+      this.showSpinner()
+    } else {
+      this.ocultSpinner()
+    }
+
+    if (this.nameActual == "") {
+      this.message = "Escriba algo para comenzar su busqueda"
+      this.productos = []
+      this.ocultSpinner()
+    }
+  }
 
   obtenerTodosProductosPorNombre(name: string) {
       //var nombre = String(this.route.snapshot.paramMap.get('nombre'));
@@ -40,9 +61,17 @@ export class BuscarComponent implements OnInit {
       },
       (error:HttpErrorResponse) => {
         if (error.status == 400) {
-          this.textError = "Error en contra la API"
+          this.message = "Error en contra la API"
         }
       });
+    }
+
+    showSpinner(){
+      this.spinner = true;
+    }
+
+    ocultSpinner(){
+      this.spinner = false;
     }
 }
 

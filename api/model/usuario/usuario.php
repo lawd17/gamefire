@@ -5,21 +5,23 @@ include "../config.php";
 include "../utilsDb.php";
 include "../errors.php";
 $dbConn =  connect($db);
-$idName = "id";
-$username = "username";
-$tableName = "usuario";
+$fieldId = "id";
+$fieldEmail = "email";
+$tableName = "Usuarios";
+$fieldPassword = "password";
 
 function validarDatos($input){
   $message = "";
-
-  $message = evaluarParametro($input,"id", "/^[A-Za-z0-9]{1,50}$/", $message);
-  $message = evaluarParametro($input,"username", "/^(?=.{8,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/", $message);
-  $message = evaluarParametro($input,"password", "/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z]?)\S{8,25}$/", $message);
+  $password = $input["password"];
+  $message = evaluarParametro($input,"username", "/^[a-z0-9_-]{3,15}$/", $message);
+  if (substr($password, 0, 3) != "$2y") {
+    $message = evaluarParametro($input,"password", "/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z]?)\S{8,25}$/", $message);
+  }
   $message = evaluarParametro($input,"nombre", "/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/", $message);
   $message = evaluarParametro($input,"apellidos", "/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]?){1,5}$/", $message);
   $message = evaluarParametro($input,"telefono", "/(\+34|0034|34)?[ -]*([0-9][ -]*){9}/", $message);
 
-  if ($message != 0) {
+  if ($message != "") {
     header(error_400() . $message);
     exit;
   }
@@ -29,23 +31,23 @@ function validarDatos($input){
   listar todos los posts o solo uno
  */
 if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-  if (isset($_GET[$idName])){
-    $input = $_GET;
-    $response = obtenerUno($dbConn,$tableName, $idName , $input);
+  if (isset($_GET[$fieldId])){
+    $input = $_GET[$fieldIdUser];
+    $response = obtenerUno($dbConn, $tableName, $fieldId , $input);
     ok_200();
     echo json_encode($response);
     exit();
   } 
 
-  if (isset($_GET[$username])){
-    $input = $_GET;
-    $response = obtenerUno($dbConn, $tableName, $username , $input);
+  if (isset($_GET[$fieldEmail])){
+    $input = $_GET[$fieldEmail];
+    $response = obtenerUno($dbConn, $tableName, $fieldEmail , $input);
     ok_200();
     echo json_encode($response);
     exit();
   } 
 
-    $response = obtenerTodos($dbConn,$tableName);
+    $response = obtenerTodos($dbConn, $tableName);
     ok_200();
     echo json_encode($response);
     exit();
@@ -54,10 +56,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
 
 // Crear un nuevo post
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-  $input = $_POST;
+  $input = obtenerDatosEntrada();
   validarDatos($input);
 
-  $response = insertar($dbConn, $tableName, $input);
+  $existe = existe($dbConn, $tableName, $fieldId, $input[$fieldId]);
+  
+  //encriptar contraseña
+  if (substr($input[$fieldPassword], 0, 3) != "$2y") {
+    $input[$fieldPassword] = password_hash($input[$fieldPassword], PASSWORD_DEFAULT);
+  }
+
+  if ($existe) {
+    $response = actualizar($fieldId, $dbConn, $tableName, $input);
+  } else {
+    $response = insertar($dbConn, $tableName, $input);
+  }
 
   ok_200();
   echo json_encode($response);
@@ -70,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE'){
 $input = $_GET;
 validarDatos($input);
 
-$response = eliminar($idName, $dbConn, $tableName, $input);
+$response = eliminar($fieldId, $dbConn, $tableName, $input);
 ok_200();
 echo json_encode($response);
 exit;
@@ -82,8 +95,15 @@ $input = $_GET;
 
 validarDatos($input);
 
-$response = actualizar($idName, $dbConn, $tableName, $input);
+//encriptar contraseña
+$input[$fieldPassword] = password_hash($input[$fieldPassword], PASSWORD_DEFAULT);
+
+$response = actualizar($fieldId, $dbConn, $tableName, $input);
 ok_200();
 echo json_encode($response);
 exit;
 }
+
+
+header(error_400() . $message);
+exit;

@@ -64,7 +64,7 @@ export class DetallePedidoComponent implements OnInit {
     this.ventaService.getVenta(id)
     .subscribe( data => {
       if (data == null) {
-        this.router.navigate(['/', '404']);
+        this.router.navigate(['/', 'home']);
       } else {
         this.venta =
         new Venta(
@@ -87,7 +87,7 @@ export class DetallePedidoComponent implements OnInit {
 
     pedidoEsDeUsuario(){
       if (this.venta.id_usuario !== this.usuario.id ) {
-        this.router.navigate(['/', '404']);
+        this.router.navigate(['/', 'home']);
       }
     }
 

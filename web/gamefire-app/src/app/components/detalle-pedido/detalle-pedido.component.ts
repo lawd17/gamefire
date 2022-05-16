@@ -8,6 +8,7 @@ import { DetalleVentaService } from 'src/app/services/detalle-venta.service';
 import { ProductosApiService } from 'src/app/services/productos-api.service';
 import { UsuarioApiService } from 'src/app/services/usuario-api.service';
 import { VentaService } from 'src/app/services/venta.service';
+import { Usuario } from 'src/app/model/data/Usuario';
 
 @Component({
   selector: 'app-detalle-pedido',
@@ -17,7 +18,8 @@ import { VentaService } from 'src/app/services/venta.service';
 export class DetallePedidoComponent implements OnInit {
 
   venta!: Venta
-  productosVenta: ProductoVenta[] = [];
+  productosVenta: ProductoVenta[] = []
+  usuario!: Usuario
 
   constructor(
     private ventaService: VentaService,
@@ -30,8 +32,8 @@ export class DetallePedidoComponent implements OnInit {
 
   ngOnInit(): void {
     registerLocaleData(localeEs, 'es')
-    this.validate();
-    this.getPedido();
+    this.validate()
+    this.getPedido()
   }
 
   obtenerProductosVenta(id_venta: number){
@@ -61,21 +63,49 @@ export class DetallePedidoComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.ventaService.getVenta(id)
     .subscribe( data => {
-      this.venta =
-      new Venta(
-        parseInt(data.id),
-        data.fecha,
-        data.impuesto,
-        parseFloat(data.total),
-        parseInt(data.id_usuario))
-        this.obtenerProductosVenta(this.venta.id);
-    });
+      if (data == null) {
+        this.router.navigate(['/', '404']);
+      } else {
+        this.venta =
+        new Venta(
+          parseInt(data.id),
+          data.fecha,
+          data.impuesto,
+          parseFloat(data.total),
+          parseInt(data.id_usuario))
+          this.obtenerUsuario()
+          this.obtenerProductosVenta(this.venta.id)
+      }
+    })
   }
 
     validate() {
       if (!this.usuarioService.autenticado) {
         this.router.navigate(['/', 'home']);
       }
+    }
+
+    pedidoEsDeUsuario(){
+      if (this.venta.id_usuario !== this.usuario.id ) {
+        this.router.navigate(['/', '404']);
+      }
+    }
+
+    obtenerUsuario(){
+      this.usuarioService.getUserAuthenticated()
+      .subscribe( data => {
+        this.usuario =
+        new Usuario(
+          parseInt(data.id),
+          data.email,
+          data.username,
+          data.password,
+          data.nombre,
+          data.apellidos,
+          data.telefono)
+          this.pedidoEsDeUsuario()
+        })
+
     }
 
 }

@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: "register", component: RegisterComponent, pathMatch: "full" },
   {path: "carrito", component: CarritoComponent, pathMatch: "full" },
   {path: "perfil", component: PerfilComponent, pathMatch: "full" },
-  {path: "detallePedido/:id", component: DetallePedidoComponent, pathMatch: "full" }
+  {path: "detallePedido/:id", component: DetallePedidoComponent, pathMatch: "full" },
 ];
 
 @NgModule({

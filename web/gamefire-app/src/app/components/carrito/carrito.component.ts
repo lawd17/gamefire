@@ -181,10 +181,10 @@ export class CarritoComponent implements OnInit {
     this.textError = "";
     this.direccionService.postDireccion(this.direccion).subscribe(data => {
       if (this.metodoPago.tipo_pago != 'CREDIT_CARD') {
-        this.metodoPago.numero_cuenta = 0;
-        this.metodoPago.titular = "";
-        this.metodoPago.expiracion = "";
-        this.metodoPago.cvv = 0;
+        this.metodoPago.numero_cuenta = 0
+        this.metodoPago.titular = ""
+        this.metodoPago.expiracion = ""
+        this.metodoPago.cvv = 0
       }
 
       this.metdoPagoService.postMetodoPago(this.metodoPago).subscribe(data => {
@@ -199,13 +199,12 @@ export class CarritoComponent implements OnInit {
                   this.carrito.forEach(item => {
                     let detalleVenta = new DetalleVenta(0, id_venta, item.producto.id, item.cantidad)
                     this.añadirDetalleVentas(detalleVenta)
-                    this.usuarioService.removeCartLocalStorage();
+                    this.usuarioService.removeCartLocalStorage()
                     this.usuarioService.reloadCartStorage()
                     this.carrito = this.usuarioService.getCarrito()
                     this.route.navigate(['/', 'detallePedido', id_venta]);
                   })
                 }
-
           })
       })
     })

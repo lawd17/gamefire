@@ -1,5 +1,6 @@
 <div class="container">
   <div class="row">
+    <!-- Menu de opciones-->
     <div class="col-md-5">
       <ul class="list-group">
         <a id="misDatos" [class.active]="misDatos.id === this.opcionSeleccionada"
@@ -32,35 +33,43 @@
             </svg></span></a>
       </ul>
     </div>
+
+
     <div class="info col-md-5">
+      <!-- Datos del usuario-->
       <div *ngIf="misDatos.id === this.opcionSeleccionada">
         <h3 class="fw-normal mb-5" style="color: #484849;">Datos</h3>
         <form action="">
 
           <div class="mb-4 pb-2">
             <label class="form-label" for="email">Email</label>
-            <input type="text" id="email" class="form-control form-control-lg" [(ngModel)]="usuario.email" name="email" [readonly]="this.readonly" />
+            <input type="text" id="email" class="form-control form-control-lg" [(ngModel)]="usuario.email" name="email"
+              [readonly]="this.readonly" />
           </div>
 
           <div class="row">
             <div class="col-md-6 mb-4 pb-2">
               <label class="form-label" for="nombre">Nombre</label>
-              <input type="text" id="nombre" class="form-control form-control-lg" [(ngModel)]="usuario.nombre" name="nombre" [readonly]="readonly" />
+              <input type="text" id="nombre" class="form-control form-control-lg" [(ngModel)]="usuario.nombre"
+                name="nombre" [readonly]="readonly" />
             </div>
             <div class="col-md-6 mb-4 pb-2">
               <label class="form-label" for="codigo_postal">Apellidos</label>
-              <input type="text" id="apellidos" class="form-control form-control-lg" [(ngModel)]="usuario.apellidos" name="apellidos" [readonly]="readonly" />
+              <input type="text" id="apellidos" class="form-control form-control-lg" [(ngModel)]="usuario.apellidos"
+                name="apellidos" [readonly]="readonly" />
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-6 mb-4 pb-2">
               <label class="form-label" for="username">Username</label>
-              <input type="text" id="username" class="form-control form-control-lg" [(ngModel)]="usuario.username" name="username" [readonly]="readonly" />
+              <input type="text" id="username" class="form-control form-control-lg" [(ngModel)]="usuario.username"
+                name="username" [readonly]="readonly" />
             </div>
             <div class="col-md-6 mb-4 pb-2">
               <label class="form-label" for="codigo_postal">Password</label>
-              <input type="password" id="password" class="form-control form-control-lg" [(ngModel)]="usuario.password" name="password" [readonly]="readonly" />
+              <input type="password" id="password" class="form-control form-control-lg" [(ngModel)]="usuario.password"
+                name="password" [readonly]="readonly" />
             </div>
           </div>
 
@@ -72,11 +81,12 @@
 
           <button *ngIf="readonly" class="btn btbtn btn-secondary" (click)="desactivarReadonly()">Editar</button>
           <button *ngIf="!readonly" class="btn btbtn btn-secondary" (click)="editarUsuario()">Guardar</button>
-          <div class="error">{{textError}}</div>
-          <div class="message">{{textMessage}}</div>
+          <div class="error">{{error}}</div>
+          <div class="message">{{message}}</div>
         </form>
       </div>
 
+      <!-- Direccion -->
       <div *ngIf="miDireccion.id === this.opcionSeleccionada">
         <h3 class="fw-normal mb-5" style="color: #484849;">Dirección de facturación</h3>
         <form action="">
@@ -115,12 +125,13 @@
           </div>
           <button *ngIf="readonly" class="btn btbtn btn-secondary" (click)="desactivarReadonly()">Editar</button>
           <button *ngIf="!readonly" class="btn btbtn btn-secondary" (click)="editarDireccion()">Guardar</button>
-          <div class="error">{{textError}}</div>
-          <div class="message">{{textMessage}}</div>
+          <div class="error">{{error}}</div>
+          <div class="message">{{message}}</div>
         </form>
 
       </div>
 
+      <!-- Metodo de pago -->
       <div *ngIf="miMetodoPago.id === this.opcionSeleccionada">
         <h2 class="fw-normal mb-1" style="color: #484849;">Metodo pago</h2>
         <form action="">
@@ -174,35 +185,37 @@
               <div class="col-md-6 mb-4 pb-2">
                 <label class="form-label" for="cvv">CVV</label>
                 <input class="form-control" type="text" id="cvv" maxlength="3" [(ngModel)]="metodoPago.cvv" name="cvv"
-                 placeholder="000" [readonly]="this.readonly">
+                  placeholder="000" [readonly]="this.readonly">
               </div>
             </div>
           </div>
 
           <button *ngIf="readonly" class="btn btbtn btn-secondary" (click)="desactivarReadonly()">Editar</button>
           <button *ngIf="!readonly" class="btn btbtn btn-secondary" (click)="editarMetodoPago()">Guardar</button>
-          <div class="error">{{textError}}</div>
-          <div class="message">{{textMessage}}</div>
+          <div class="error">{{error}}</div>
+          <div class="message">{{message}}</div>
         </form>
 
       </div>
     </div>
+
+    <!-- Lista de pedidos -->
     <div *ngIf="misPedidos.id === this.opcionSeleccionada" class="row">
       <h4>Mis Pedidos</h4>
       <div *ngIf="pedidos.length == 0">No has realizado ningun pedido</div>
       <div *ngFor="let pedido of pedidos" class="col-12 col-md-6">
-          <div class="card m-2">
-            <a routerLink="/detallePedido/{{pedido.id}}" class="text-decoration-none text-black">
-              <div class="card-body">
-                <h5 class="card-title">ID: {{pedido.id}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Fecha: {{pedido.fecha}}</h6>
-                <span class="card-text">
-                  {{ pedido.total | currency : 'EUR':'symbol':'':'es'}} - <strong>{{pedido.impuesto}} incluido</strong>
-                </span>
-              </div>
-            </a>
-          </div>
+        <div class="card m-2">
+          <a routerLink="/detallePedido/{{pedido.id}}" class="text-decoration-none text-black">
+            <div class="card-body">
+              <h5 class="card-title">ID: {{pedido.id}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Fecha: {{pedido.fecha}}</h6>
+              <span class="card-text">
+                {{ pedido.total | currency : 'EUR':'symbol':'':'es'}} - <strong>{{pedido.impuesto}} incluido</strong>
+              </span>
+            </div>
+          </a>
         </div>
+      </div>
     </div>
   </div>
 </div>

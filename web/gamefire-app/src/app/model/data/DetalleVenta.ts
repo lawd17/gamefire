@@ -1,3 +1,4 @@
+//Clase que representa los datos de programa
 export class DetalleVenta {
   id: number;
   id_venta: number;

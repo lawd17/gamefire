@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { apiMetodoPago } from '../model/data/apiMetodoPago';
 import { MetodoPago } from '../model/data/MetodoPago';
@@ -23,5 +22,5 @@ export class MetodoPagoService {
   postMetodoPago(metodoPago: MetodoPago): Observable<string> {
     return this.http.post<string>(this.baseURL, JSON.stringify(metodoPago))
   }
-
+  
 }

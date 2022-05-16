@@ -1,3 +1,5 @@
+// Formato de los datos como llegan da la api
+
 export interface apiDetallesVenta {
   id: string;
   id_venta: string;

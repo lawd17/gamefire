@@ -1,3 +1,4 @@
+// Formato de los datos como llegan da la api
 export interface apiVenta {
   id: string;
   fecha: string;

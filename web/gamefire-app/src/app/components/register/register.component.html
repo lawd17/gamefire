@@ -1,67 +1,72 @@
 <div id="body-register">
   <main class="form-register">
-      <form [formGroup]="usuario">
-          <h1 class="h3 mb-3 fw-normal">Por favor, identificate</h1>
+    <!-- Formulario registro-->
+    <form [formGroup]="usuario">
+      <h1 class="h3 mb-3 fw-normal">Por favor, identificate</h1>
 
-            <div class="form-outline">
-              <label class="form-label" for="formEmail">Email</label>
-              <input type="text" id="formEmail" class="form-control form-control-lg" formControlName="email"/>
-              <div class="error"
-              *ngIf=" (this.usuario.get('email')?.hasError('required') && this.usuario.get('email')?.touched)"
-              >Correo requerido.</div>
-              <div class="error"
-              *ngIf=" (this.usuario.get('email')?.hasError('email') && this.usuario.get('email')?.touched)"
-              >El correo no es valido.</div>
-           </div>
+      <div class="form-outline">
+        <label class="form-label" for="formEmail">Email</label>
+        <input type="text" id="formEmail" class="form-control form-control-lg" formControlName="email" />
+        <div class="error"
+          *ngIf=" (this.usuario.get('email')?.hasError('required') && this.usuario.get('email')?.touched)">Correo
+          requerido.</div>
+        <div class="error"
+          *ngIf=" (this.usuario.get('email')?.hasError('email') && this.usuario.get('email')?.touched)">El correo no es
+          valido.</div>
+      </div>
 
-              <div class="form-outline">
-                <label class="form-label" for="formNombre">Nombre</label>
-                <input type="text" id="formNombre" class="form-control form-control-lg" formControlName="nombre"/>
-                <div class="error"
-                *ngIf="(this.usuario.get('nombre')?.hasError('required') && this.usuario.get('nombre')?.touched)"
-                >Nombre requerido.</div>
-                <div class="error"
-                *ngIf=" (this.usuario.get('nombre')?.hasError('pattern') && this.usuario.get('nombre')?.touched)"
-                >Formato del nombre no valido.</div>
-              </div>
+      <div class="form-outline">
+        <label class="form-label" for="formNombre">Nombre</label>
+        <input type="text" id="formNombre" class="form-control form-control-lg" formControlName="nombre" />
+        <div class="error"
+          *ngIf="(this.usuario.get('nombre')?.hasError('required') && this.usuario.get('nombre')?.touched)">Nombre
+          requerido.</div>
+        <div class="error"
+          *ngIf=" (this.usuario.get('nombre')?.hasError('pattern') && this.usuario.get('nombre')?.touched)">Formato del
+          nombre no valido.</div>
+      </div>
 
-              <div class="form-outline">
-                <label class="form-label" for="formApellidos">Apellidos</label>
-                <input type="text" id="formApellidos" class="form-control form-control-lg" formControlName="apellidos"/>
-                <div class="error" *ngIf=" (this.usuario.get('apellidos')?.hasError('required') && this.usuario.get('apellidos')?.touched)"
-                >Apellidos requerido.</div>
-                <div class="error"
-                *ngIf=" (this.usuario.get('apellidos')?.hasError('pattern') && this.usuario.get('apellidos')?.touched)"
-                >Formato de apellidos no valido.</div>
-              </div>
+      <div class="form-outline">
+        <label class="form-label" for="formApellidos">Apellidos</label>
+        <input type="text" id="formApellidos" class="form-control form-control-lg" formControlName="apellidos" />
+        <div class="error"
+          *ngIf=" (this.usuario.get('apellidos')?.hasError('required') && this.usuario.get('apellidos')?.touched)">
+          Apellidos requerido.</div>
+        <div class="error"
+          *ngIf=" (this.usuario.get('apellidos')?.hasError('pattern') && this.usuario.get('apellidos')?.touched)">
+          Formato de apellidos no valido.</div>
+      </div>
 
-              <div class="form-outline">
-                <label class="form-label" for="formUsername">Username</label>
-                <input type="text" id="formUsername" class="form-control form-control-lg" formControlName="username"/>
-                <div class="error" *ngIf=" (this.usuario.get('username')?.hasError('required') && this.usuario.get('username')?.touched)"
-                >Username requerido.</div>
-                <div class="error"
-                *ngIf=" (this.usuario.get('username')?.hasError('pattern') && this.usuario.get('username')?.touched)"
-                >Formato del username incorrecto, minimo tres caracteres.</div>
-              </div>
+      <div class="form-outline">
+        <label class="form-label" for="formUsername">Username</label>
+        <input type="text" id="formUsername" class="form-control form-control-lg" formControlName="username" />
+        <div class="error"
+          *ngIf=" (this.usuario.get('username')?.hasError('required') && this.usuario.get('username')?.touched)">
+          Username requerido.</div>
+        <div class="error"
+          *ngIf=" (this.usuario.get('username')?.hasError('pattern') && this.usuario.get('username')?.touched)">Formato
+          del username incorrecto, minimo tres caracteres.</div>
+      </div>
 
-              <div class="form-outline">
-                <label class="form-label" for="formPassword">Password</label>
-                <input type="password" id="formPassword" class="form-control form-control-lg" formControlName="password"/>
-                <div class="error" *ngIf="(this.usuario.get('password')?.hasError('required') && this.usuario.get('password')?.touched)"
-                >Password requerida.</div>
-                <div class="error"
-                *ngIf=" (this.usuario.get('password')?.hasError('pattern') && this.usuario.get('password')?.touched)"
-                >La contraseña debe tener minimo 8 caracterres y almenos un número.</div>
-              </div>
+      <div class="form-outline">
+        <label class="form-label" for="formPassword">Password</label>
+        <input type="password" id="formPassword" class="form-control form-control-lg" formControlName="password" />
+        <div class="error"
+          *ngIf="(this.usuario.get('password')?.hasError('required') && this.usuario.get('password')?.touched)">Password
+          requerida.</div>
+        <div class="error"
+          *ngIf=" (this.usuario.get('password')?.hasError('pattern') && this.usuario.get('password')?.touched)">La
+          contraseña debe tener minimo 8 caracterres y almenos un número.</div>
+      </div>
 
-            <div class="form-outline">
-              <label class="form-label" for="formTelefono">Telefono</label>
-              <input type="text" id="formTelefono" class="form-control form-control-lg" formControlName="telefono"/>
-            </div>
-            <div class="my-5">
-              <button [disabled]="usuario.invalid" class="w-100 btn btn-lg btn-primary" (click)="register()" type="submit">Login</button>
-            </div>
-      </form>
+      <div class="form-outline">
+        <label class="form-label" for="formTelefono">Telefono</label>
+        <input type="text" id="formTelefono" class="form-control form-control-lg" formControlName="telefono" />
+      </div>
+      <div class="my-5">
+        <button [disabled]="usuario.invalid" class="w-100 btn btn-lg btn-primary" (click)="register()"
+          type="submit">Login</button>
+      </div>
+    </form>
   </main>
 </div>

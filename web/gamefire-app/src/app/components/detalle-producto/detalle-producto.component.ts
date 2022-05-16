@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductosApiService } from 'src/app/services/productos-api.service';
-import { Location }from '@angular/common';
+import { Location } from '@angular/common';
 import { Producto } from 'src/app/model/data/Producto';
 import { UsuarioApiService } from 'src/app/services/usuario-api.service';
 import { itemCarrito } from 'src/app/model/data/itemCarrito';
@@ -13,6 +13,7 @@ import { CategoriaApiService } from 'src/app/services/categoria-api.service';
   templateUrl: './detalle-producto.component.html',
   styleUrls: ['./detalle-producto.component.scss']
 })
+
 export class DetalleProductoComponent implements OnInit {
   producto!: Producto
   categoria!: Categoria
@@ -22,54 +23,66 @@ export class DetalleProductoComponent implements OnInit {
     private categoriaService: CategoriaApiService,
     private usuarioService: UsuarioApiService,
     private route: ActivatedRoute,
-    private location: Location) {
-  }
+    private location: Location)
+  {}
 
   ngOnInit(): void {
     this.getProducto()
   }
 
-
-   /**
-   * Metodo asincrono para obtener la pelicula seleccionada
+  /**
+   * Metodo que se encgar de obtener el producto a paritr del id en la url, tras
+   * acabar llama a obtenerCategoria
    */
-     getProducto(): void {
-      const id = Number(this.route.snapshot.paramMap.get('id'));
-      this.productoService.getProducto(id)
-      .subscribe( producto => {
+  getProducto(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.productoService.getProducto(id)
+      .subscribe(producto => {
         this.producto =
-        new Producto(
-          parseInt(producto.id),
-          producto.nombre,
-          producto.imagen,
-          producto.descripcion,
-          parseFloat(producto.precio_venta),
-          parseInt(producto.stock),
-          parseInt(producto.id_categoria))
+          new Producto(
+            parseInt(producto.id),
+            producto.nombre,
+            producto.imagen,
+            producto.descripcion,
+            parseFloat(producto.precio_venta),
+            parseInt(producto.stock),
+            parseInt(producto.id_categoria))
         this.getCategoria();
-     });
+      });
 
-    }
+  }
 
-    getCategoria(){
-      this.categoriaService.getCategoria(this.producto.id_categoria)
-      .subscribe( categoria => {
+  /**
+   * Metodo que se encarga de obtener la categoria a partir del id_categoria
+   * del producto actual
+   */
+  getCategoria() {
+    this.categoriaService.getCategoria(this.producto.id_categoria)
+      .subscribe(categoria => {
         this.categoria = new Categoria(
           parseInt(categoria.id),
           categoria.nombre,
           categoria.descripcion
         );
       })
-    }
+  }
 
-    addCarrito(producto: Producto){
-      if(this.usuarioService.getAutenticado()){
-        this.usuarioService.addProductInCart(new itemCarrito(producto))
-      }
+  /**
+   * Metodo que añade el producto actual al carrito
+   * @param producto
+   */
+  addCarrito(producto: Producto) {
+    if (this.usuarioService.getAutenticado()) {
+      this.usuarioService.addProductInCart(new itemCarrito(producto))
     }
+  }
 
-    autenticado(){
-      return this.usuarioService.getAutenticado();
-    }
+  /**
+   * Funcion que valida si el usuario esta autenticado
+   * @returns true/false
+   */
+  autenticado() {
+    return this.usuarioService.getAutenticado();
+  }
 
 }

@@ -27,4 +27,5 @@ export class VentaService {
   postVenta(venta: Venta): Observable<string> {
     return this.http.post<string>(this.baseURL, JSON.stringify(venta))
   }
+  
 }

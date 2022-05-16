@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable, retry } from 'rxjs';
+import { Observable } from 'rxjs';
 import { apiUsuario } from '../model/data/apiUsuario';
 import { itemCarrito } from '../model/data/itemCarrito';
 import { Usuario } from '../model/data/Usuario';
@@ -129,4 +129,5 @@ export class UsuarioApiService {
     this.removeLocalStorageData(this.emailUserAutenticado);
     this.reloadCartStorage();
   }
+  
 }

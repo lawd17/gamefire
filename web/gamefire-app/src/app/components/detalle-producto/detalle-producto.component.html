@@ -1,11 +1,11 @@
-<div class="W-100 m-5"></div>
-<div class="container">
+<div class="container mt-5">
   <div class="row">
-
+    <!-- Imagen producto-->
     <div class=" col-md-6">
       <img src="{{producto.imagen}}" class="img-fluid" alt="{{producto.nombre}}">
     </div>
 
+    <!-- Datos del producto-->
     <div class="col-md-6">
       <div class="row">
         <div class="col-12">
@@ -33,17 +33,24 @@
             <span class="garantia">Garantía Garantía de Sustitución en 24h</span>
           </div>
         </div>
+
         <div class="button-block row">
           <div class="button-cart col-12 col-md-4">
-            <button data-bs-toggle="modal" href="#advertisemetModal" (click)="addCarrito(producto)" class="btn btn-warning">
-              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart-check" viewBox="0 0 16 16">
-                <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
-                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+            <button data-bs-toggle="modal" href="#advertisemetModal" (click)="addCarrito(producto)"
+              class="btn btn-warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                class="bi bi-cart-check" viewBox="0 0 16 16">
+                <path
+                  d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z" />
+                <path
+                  d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
               </svg>
             </button>
           </div>
+
           <div class="button-buy col-12 col-md-8">
-            <button  data-bs-toggle="modal" href="#advertisemetModal" class="btn-primary btn" (click)="addCarrito(producto)">Comprar</button>
+            <button data-bs-toggle="modal" href="#advertisemetModal" class="btn-primary btn"
+              (click)="addCarrito(producto)">Comprar</button>
           </div>
         </div>
       </div>
@@ -52,7 +59,9 @@
 
     </div>
   </div>
-  <div class="row">
+
+  <!-- Descripcion y otros datos-->
+  <div class="row mt-5">
     <div class="col-12">
       <strong>Descripcion</strong>
     </div>
@@ -62,7 +71,9 @@
   </div>
 </div>
 
-<div *ngIf="autenticado()" class="modal fade" id="advertisemetModal" aria-hidden="true" aria-labelledby="advertisemetModalLadel" tabindex="-1">
+<!-- Botones compra y añadir a carrito con modal para usuario logueado-->
+<div *ngIf="autenticado()" class="modal fade" id="advertisemetModal" aria-hidden="true"
+  aria-labelledby="advertisemetModalLadel" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -73,14 +84,19 @@
         Tu producto se ha añadido a tu carrito
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal" routerLink="/carrito">Ir al carrito</button>
-        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Seguir comprando</button>
+        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+          data-bs-dismiss="modal" routerLink="/carrito">Ir al carrito</button>
+        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+          data-bs-dismiss="modal">Seguir comprando</button>
       </div>
     </div>
   </div>
 </div>
 
-<div *ngIf="!autenticado()" class="modal fade" id="advertisemetModal" aria-hidden="true" aria-labelledby="advertisemetModalLadel" tabindex="-1">
+<!-- Botones compra y añadir a carrito con modal para usuario no logueados-->
+
+<div *ngIf="!autenticado()" class="modal fade" id="advertisemetModal" aria-hidden="true"
+  aria-labelledby="advertisemetModalLadel" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -91,10 +107,11 @@
         Tienes que estar logeado para realizar compras o añadir al carrito
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal" routerLink="/login">Login</button>
-        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Seguir mirando</button>
+        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+          data-bs-dismiss="modal" routerLink="/login">Login</button>
+        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+          data-bs-dismiss="modal">Seguir mirando</button>
       </div>
     </div>
   </div>
 </div>
-

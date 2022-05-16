@@ -1,4 +1,4 @@
-import { Producto } from "./Producto";
+//Clase de tabla temporal que representa los datos de cada producto comrprado
 
 export class ProductoVenta {
   id: number;

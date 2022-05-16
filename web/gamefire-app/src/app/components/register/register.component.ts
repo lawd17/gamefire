@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validator, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioApiService } from 'src/app/services/usuario-api.service';
 
@@ -9,20 +9,25 @@ import { UsuarioApiService } from 'src/app/services/usuario-api.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
+
 export class RegisterComponent implements OnInit {
 
   confirmPassword!: string;
-  errorText = "";
+  error: string = "";
+  message: string = ""
   usuario!: FormGroup;
 
 
-  constructor(private userService: UsuarioApiService, private router: Router) {}
+  constructor(private userService: UsuarioApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.createFormulario();
   }
 
-  createFormulario(){
+  /**
+   *  Metodo que genera el formgrup con los pattern y los campos requeridos
+   */
+  createFormulario() {
     this.usuario = new FormGroup({
       email: new FormControl('', [Validators.email, Validators.required]),
       nombre: new FormControl('', [Validators.required, Validators.pattern(/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)$/)]),
@@ -33,22 +38,30 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  /**
+   * Metodo que realiza el registro del usaurio con los datos del formulario
+   */
   register() {
-    this.errorText = "";
-    var response = this.userService.registerUser(this.usuario)
-    .subscribe(data => {
-      if (data) {
-        this.userService.setLocalSotorageData(this.userService.userVarStorage, data)
-        this.userService.autenticado = data
-        this.router.navigate(['/home'])
-      } else {
-        this.errorText = "Error en alguno de los datos introducido.";
-      }
-    },
-    (error:HttpErrorResponse) => {
-      if (error.status == 400) {
-        this.errorText = "Ha ocurrido un erro inesperado, vuelva a intentarlo.";
-      }
-    });
+    this.error = "";
+    this.userService.registerUser(this.usuario)
+      .subscribe(data => {
+        if (data) {
+          this.userService.setLocalSotorageData(this.userService.userVarStorage, data)
+          this.userService.autenticado = data
+          this.router.navigate(['/login'])
+        } else {
+          this.error = "Error en alguno de los datos introducido.";
+        }
+      }, (error: HttpErrorResponse) => this.controlError(error))
+  }
+
+  controlError(error: HttpErrorResponse) {
+    if (error.status == 400) {
+      this.error = "Ha ocurrido un error con los datos para la solicitud, intentelo de nuevo"
+    }
+
+    if (error.status == 500) {
+      this.error = "Ha ocurrido un error con el servidor, intentelo de nuevo mas tarde."
+    }
   }
 }

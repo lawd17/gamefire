@@ -28,4 +28,5 @@ export class DetalleVentaService {
   postDetalleVenta(detalle_venta: DetalleVenta): Observable<string> {
     return this.http.post<string>(this.baseURL, JSON.stringify(detalle_venta))
   }
+
 }

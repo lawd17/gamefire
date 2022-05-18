@@ -9,17 +9,21 @@ $fieldId = "id";
 $fieldIdUser = "id_usuario";
 $tableName = "Metodos_pago";
 
-function validarDatos($input){
+/**
+ * Metodo que se encarga de comprobar que los datos cumplen 
+ * el formato requerido si no se lanza un http 400
+ */
+function validarDatos(array $input): void{
   $message = "";
 
-  $message = evaluarParametro($input,"id_usuario", "/^[A-Za-z0-9]{1,50}$/", $message);
-  $message = evaluarParametro($input,"tipo_pago", "/\w*/", $message);
+  $message = evaluarParametro($input["id_usuario"], "/^[A-Za-z0-9]{1,50}$/", $message);
+  $message = evaluarParametro($input["tipo_pago"], "/\w*/", $message);
   
   if ($input["numero_cuenta"] != 0) {
-    $message = evaluarParametro($input,"numero_cuenta", "/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35d{3})d{11})$/", $message);
+    $message = evaluarParametro($input["numero_cuenta"], "/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35d{3})d{11})$/", $message);
   }
   if ($input["expiracion"] != "") {
-    $message = evaluarParametro($input,"expiracion", "/^([(0+[1-9]|1+[0-2])+[\/]+([2-9][0-9])$/", $message);
+    $message = evaluarParametro($input["expiracion"], "/^([(0+[1-9]|1+[0-2])+[\/]+([2-9][0-9])$/", $message);
   }
 
   if ($message != "") {

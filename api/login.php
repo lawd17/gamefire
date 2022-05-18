@@ -6,11 +6,15 @@ include "./model/utilsDb.php";
 include "./model/errors.php";
 $dbConn =  connect($db);
 
-function validarDatos($input){
+/**
+ * Metodo que se encarga de comprobar que los datos cumplen 
+ * el formato requerido si no se lanza un http 400
+ */
+function validarDatos(array $input): void{
   $message = "";
 
-  $message = evaluarParametro($input,"email", "/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/", $message);
-  $message = evaluarParametro($input,"password", "/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z]?)\S{8,25}$/", $message);
+  $message = evaluarParametro($input["email"], "/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/", $message);
+  $message = evaluarParametro($input["password"], "/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z]?)\S{8,25}$/", $message);
 
   if ($message != "") {
     error_400();
@@ -32,9 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $email = $input[$fieldEmail];
     $password = $input[$fieldPassword];
-
-    $pp = password_hash($password, PASSWORD_DEFAULT);
-
 
     $response = obtenerUno($dbConn, $tableName, $fieldEmail, $email); 
     if ($response != false) {

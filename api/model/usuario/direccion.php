@@ -9,13 +9,18 @@ $fieldId = "id";
 $fieldUserId = "id_usuario";
 $tableName = "Direcciones";
 
-function validarDatos($input){
+/**
+ * Metodo que se encarga de comprobar que los datos cumplen 
+ * el formato requerido si no se lanza un http 400
+ */
+function validarDatos(array $input): void
+{
   $message = "";
 
-  $message = evaluarParametro($input,"id_usuario", "/^[A-Za-z0-9]{1,50}$/", $message);
-  $message = evaluarParametro($input,"ciudad", "/^(\w*[\s]?){1,5}$/", $message);
-  $message = evaluarParametro($input,"codigo_postal", "/^[0-5][1-9]{3}[0-9]$/", $message);
-  $message = evaluarParametro($input,"pais", "/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+)$/", $message);
+  $message = evaluarParametro($input["id_usuario"], "/^[A-Za-z0-9]{1,50}$/", $message);
+  $message = evaluarParametro($input["ciudad"], "/^(\w*[\s]?){1,5}$/", $message);
+  $message = evaluarParametro($input["codigo_postal"], "/^[0-5][1-9]{3}[0-9]$/", $message);
+  $message = evaluarParametro($input["pais"], "/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+)$/", $message);
 
   if ($message != "") {
     header(error_400() . $message);
@@ -23,28 +28,26 @@ function validarDatos($input){
   }
 }
 
-/*
-  listar todos los posts o solo uno
- */
 
- if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-  if (isset($_GET[$fieldUserId])){
+//Peticion GET
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+  if (isset($_GET[$fieldUserId])) {
     $input = $_GET[$fieldUserId];
-    $response = obtenerUno($dbConn,$tableName, $fieldUserId ,$input);
+    $response = obtenerUno($dbConn, $tableName, $fieldUserId, $input);
 
     ok_200();
     echo json_encode($response);
     exit();
-  } 
+  }
 
-    $response = obtenerTodos($dbConn,$tableName);
-    ok_200();
-    echo json_encode($response);
-    exit();
+  $response = obtenerTodos($dbConn, $tableName);
+  ok_200();
+  echo json_encode($response);
+  exit();
 }
 
-// Crear un nuevo post
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+// Peticion POST
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $input = obtenerDatosEntrada();
   validarDatos($input);
 
@@ -59,23 +62,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   ok_200();
   echo json_encode($response);
   exit;
-
 }
 
-//Borrar
-if ($_SERVER['REQUEST_METHOD'] == 'DELETE'){
-$input = $_GET;
-validarDatos($input);
+// Peticion DELETE
+if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+  $input = $_GET;
+  validarDatos($input);
 
-$response = eliminar($fieldId, $dbConn, $tableName, $input);
+  $response = eliminar($fieldId, $dbConn, $tableName, $input);
 
-ok_200();
-echo json_encode($response);
-exit;
+  ok_200();
+  echo json_encode($response);
+  exit;
 }
 
 /*
-//Actualizar
+// Peticion PUT
 if ($_SERVER['REQUEST_METHOD'] == 'PUT'){
  $input = $_GET;
 

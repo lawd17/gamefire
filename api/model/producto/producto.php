@@ -9,16 +9,20 @@ $fieldId = "id";
 $fieldIdCategorias = "id_categoria";
 $fieldNombre = "nombre";
 $tableName = "Productos";
-$limit = 10;
+$limit = 10;//limite para los campos por defecto
 
-function validarDatos($input){
+/**
+ * Metodo que se encarga de comprobar que los datos cumplen 
+ * el formato requerido si no se lanza un http 400
+ */
+function validarDatos(array $input): void{
   $message = "";
 
-  $message = evaluarParametro($input,"nombre", "/^[A-ZÁÉÍÓÚa-zñáéíóú\s]*$/", $message);
-  $message = evaluarParametro($input,"imagen", "/^[\w/\.]+(\s|)$/", $message);
-  $message = evaluarParametro($input,"precio_venta", "/^[\d]+(\.\,[\d]{1,4})?$/", $message);
-  $message = evaluarParametro($input,"stock", "/^\d{1,5}$/", $message);
-  $message = evaluarParametro($input,"id_categoria", "/^[A-Za-z0-9]{1,50}$/", $message);
+  $message = evaluarParametro($input["nombre"], "/^[A-ZÁÉÍÓÚa-zñáéíóú\s]*$/", $message);
+  $message = evaluarParametro($input["imagen"], "/^[\w/\.]+(\s|)$/", $message);
+  $message = evaluarParametro($input["precio_venta"], "/^[\d]+(\.\,[\d]{1,4})?$/", $message);
+  $message = evaluarParametro($input["stock"], "/^\d{1,5}$/", $message);
+  $message = evaluarParametro($input["id_categoria"], "/^[A-Za-z0-9]{1,50}$/", $message);
 
 
   if ($message != 0) {
@@ -50,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
 
   } else if (isset($_GET[$fieldIdCategorias])){
     $input = $_GET[$fieldIdCategorias];
-    $response = obtenerPorCategoria($dbConn, $tableName, $fieldIdCategorias, $input, $limit);
+    $response = obtenerTodosByField($dbConn, $tableName, $fieldIdCategorias, $input, $limit);
     ok_200();
     echo json_encode($response);
     exit();
@@ -70,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
   }
 }
 /*
-// Crear un nuevo post
+//Peticion POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $input = obtenerDatosEntrada();
   validarDatos($input);
@@ -89,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 }
 
-//Borrar
+//Peticion DELETE
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE'){
 $input = $_GET;
 validarDatos($input);
@@ -100,7 +104,8 @@ echo json_encode($response);
 exit;
 }
 
-//Actualizar
+//Peticion PUT
+
 if ($_SERVER['REQUEST_METHOD'] == 'PUT'){
 $input = $_GET;
 

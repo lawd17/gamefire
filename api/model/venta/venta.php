@@ -9,12 +9,15 @@ $fieldId = "id";
 $fieldIdUser = "id_usuario";
 $tableName = "Ventas";
 
-function validarDatos($input){
+/**
+ * Metodo que se encarga de comprobar que los datos cumplen 
+ * el formato requerido si no se lanza un http 400
+ */
+function validarDatos(array $input): void{
   $message = "";
 
-  $message = evaluarParametro($input, "fecha", "/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/", $message);
-  $message = evaluarParametro($input, "impuesto", "/^([A-Z]){2,10}$/", $message);
-
+  //$message = evaluarParametro($input["fecha"], "/(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})/m", $message);
+  $message = evaluarParametro($input["impuesto"], "/^([A-Z]){2,10}$/", $message);
 
   if ($message != "") {
     header(error_400() . $message);
@@ -37,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
 
   if (isset($_GET[$fieldIdUser])){
     $input = $_GET[$fieldIdUser];
-    $response = obtenerUno($dbConn,$tableName, $fieldIdUser ,$input);
+    $response = obtenerTodosByField($dbConn, $tableName, $fieldIdUser, $input);
 
     ok_200();
     echo json_encode($response);

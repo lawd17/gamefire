@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { apiProducto } from '../model/data/apiProducto';
@@ -9,6 +9,8 @@ import { Producto } from '../model/data/Producto';
   providedIn: 'root'
 })
 export class ProductosApiService {
+  searchProductos: Producto[] = [];
+  searchValue: string = "";
 
   baseURL: string = "http://192.168.1.43/API/gamefire/api/model/producto/producto.php";
 

@@ -8,45 +8,51 @@ import { UsuarioApiService } from 'src/app/services/usuario-api.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
   email!: string;
   password!: string;
-  errorText = "";
-  constructor(private userService: UsuarioApiService, private route: Router) {}
+  error = "";
 
-  ngOnInit(): void {
+  constructor(private userService: UsuarioApiService, private route: Router) { }
 
-  }
+  ngOnInit(): void {}
 
   ngDoCheck(): void {
-    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
-    //Add 'implements DoCheck' to the class.
+    //control de url para el caso de ir la login si ya esta logueado
     if (this.userService.autenticado) {
       this.route.navigate(["/", "home"])
     }
   }
 
+  /**
+   * Metodo que se encarga de realizar el login
+   */
   login() {
-    this.errorText = "";
+    this.error = "";
 
     this.userService.login(this.email, this.password)
-    .subscribe(
+      .subscribe(
         data => {
           if (data) {
             this.userService.setLocalSotorageData(this.userService.userVarStorage, data)
             this.userService.emailUserAutenticado = data
             this.userService.autenticado = true;
           } else {
-            this.errorText = "El email o password son incorrectos.";
+            this.error = "El email o password son incorrectos.";
           }
-        },
-        (error:HttpErrorResponse) => {
-          //error en el formato de la contraseña o el correo
-          if (error.status == 400) {
-            this.errorText = "El email o password son incorrectos.";
-          }
-        });
+        }, (error: HttpErrorResponse) => this.controlError(error))
 
+  }
+
+  controlError(error: HttpErrorResponse) {
+    if (error.status == 400) {
+      this.error = "El email o la contrañase no tienen el formato adecuado"
+    }
+
+    if (error.status == 500) {
+      this.error = "Ha ocurrido un error con el servidor, intentelo de nuevo mas tarde."
+    }
   }
 
 }

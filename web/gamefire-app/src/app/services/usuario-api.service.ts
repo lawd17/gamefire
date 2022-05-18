@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable, retry } from 'rxjs';
+import { Observable } from 'rxjs';
 import { apiUsuario } from '../model/data/apiUsuario';
 import { itemCarrito } from '../model/data/itemCarrito';
 import { Usuario } from '../model/data/Usuario';
@@ -56,10 +56,10 @@ export class UsuarioApiService {
   logout() {
     this.removeLocalStorageData(this.userVarStorage)
   }
-  
+
   //TODO MIRAR SI ESTAS DOS FUNCIONES TIENEN SENTIDO
-  postUser(usuario: Usuario): Observable<boolean> {
-    return this.http.post<boolean>(this.baseUserUrl, JSON.stringify(usuario))
+  postUser(usuario: Usuario): Observable<string> {
+    return this.http.post<string>(this.baseUserUrl, JSON.stringify(usuario))
   }
 
   registerUser(usuario: FormGroup): Observable<boolean> {
@@ -124,4 +124,10 @@ export class UsuarioApiService {
   removeLocalStorageData(key: string) {
     localStorage.removeItem(key)
   }
+
+  removeCartLocalStorage(){
+    this.removeLocalStorageData(this.emailUserAutenticado);
+    this.reloadCartStorage();
+  }
+  
 }

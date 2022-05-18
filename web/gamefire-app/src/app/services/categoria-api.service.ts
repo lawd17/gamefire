@@ -22,4 +22,5 @@ export class CategoriaApiService {
     console.log('getCategoria '+ this.baseURL)
     return this.http.get<apiCategoria>(this.baseURL + "?id=" + id)
   }
+
 }

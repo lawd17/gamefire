@@ -1,3 +1,4 @@
+//Clase que representa los datos de programa
 export class Usuario {
   id: number;
   email: string;

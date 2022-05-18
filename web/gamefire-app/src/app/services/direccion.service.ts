@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { apiDireccion } from '../model/data/apiDireccion';
 import { Direccion } from '../model/data/Direccion';
@@ -20,8 +19,8 @@ export class DireccionService {
     return this.http.get<apiDireccion>(this.baseURL + "?id_usuario=" + id);
   }
 
-  postDireccion(direccion: Direccion): Observable<boolean> {
-    return this.http.post<boolean>(this.baseURL, JSON.stringify(direccion))
+  postDireccion(direccion: Direccion): Observable<string> {
+    return this.http.post<string>(this.baseURL, JSON.stringify(direccion))
   }
 
 }

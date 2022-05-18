@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AppRoutingModule } from 'src/app/app-routing.module';
+import { Router } from '@angular/router';
+import { ProductosApiService } from 'src/app/services/productos-api.service';
 import { UsuarioApiService } from 'src/app/services/usuario-api.service';
 
 
@@ -10,17 +11,34 @@ import { UsuarioApiService } from 'src/app/services/usuario-api.service';
 })
 
 export class NavbarComponent implements OnInit {
+  searchValue: string = "";
 
-  constructor(private router: AppRoutingModule, private userService: UsuarioApiService) {}
+  constructor(private userService: UsuarioApiService,
+    private productoService: ProductosApiService,
+    private router: Router)
+  { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  ngDoCheck(): void {
+
+    if (this.searchValue != this.productoService.searchValue) {
+      this.productoService.searchValue = this.searchValue;
+      this.router.navigate(['/', 'buscar'])
+    }
   }
 
-  logout(){
+  /**
+   * Metodo para relizar el logout
+   */
+  logout() {
     this.userService.logout();
   }
 
-  autenticado(){
+  /**
+   * Funcion que comprueba si el usuario esta logueado
+   */
+  autenticado() {
     return this.userService.autenticado;
   }
 

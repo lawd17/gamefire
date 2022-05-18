@@ -1,5 +1,6 @@
 <h1>Pagina Home</h1>
 <div class="container">
+  <!-- Lista de categorias -->
   <div *ngFor="let categoria of categorias">
     <h2>{{categoria.nombre}}</h2>
     <app-cards-productos [categoria]="categoria"></app-cards-productos>

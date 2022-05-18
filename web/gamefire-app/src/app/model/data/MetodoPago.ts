@@ -1,3 +1,4 @@
+//Clase que representa los datos de programa
 export class MetodoPago {
   id: number;
   tipo_pago: string;

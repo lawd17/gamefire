@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AppRoutingModule } from 'src/app/app-routing.module';
 import { Categoria } from 'src/app/model/data/Categoria';
 import { CategoriaApiService } from 'src/app/services/categoria-api.service';
 
@@ -12,15 +11,12 @@ import { CategoriaApiService } from 'src/app/services/categoria-api.service';
 export class HomeComponent implements OnInit {
   public categorias: Categoria[] = [];
 
-  constructor(
-    private router: AppRoutingModule,
-    public categoriaService: CategoriaApiService) {
-  }
+  constructor( public categoriaService: CategoriaApiService) {}
 
   ngOnInit(): void {
     this.obtenerTodasCategorias();
   }
-  
+
   obtenerTodasCategorias(){
     this.categoriaService.obtenerTodasCategoria()
     .subscribe(data => {

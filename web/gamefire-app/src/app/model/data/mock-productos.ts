@@ -1,6 +1,6 @@
 import { itemCarrito } from "./itemCarrito";
-import { Producto } from "./Producto";
 
+//Datos mock para relizar pruebas
 export const PRODUCTOS: itemCarrito[] = [
   {
     producto: {

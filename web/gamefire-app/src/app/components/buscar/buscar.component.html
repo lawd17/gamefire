@@ -1,22 +1,25 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-4">
-
-    </div>
-
-    <div class="list col-8">
-      <!-- Product List-->
-      <div class="producto-search" *ngFor="let producto of productos">
-        <a class="text-decoration-none text-black" routerLink="/producto/{{producto.id}}">
-          <img
-            src={{producto.imagen}}
-            class="card-img-top"
-            alt={{producto.nombre}}
-          />
-          <h6 class="text-muted">{{producto.nombre}}</h6>
-          <h5 class="">{{producto.precio_venta}}</h5>
-        </a>
+  <!-- Spinner-->
+  <div *ngIf="spinner" class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <div>
+    <h4 class="text-muted m-3">Productos que contengan ->  "{{this.searchValue}}" </h4>
+    <h5>{{message}}</h5>
+  </div>
+  <div class="list m-2">
+    <!-- Product List-->
+    <div class="producto-search " *ngFor="let producto of productos">
+      <a class="text-decoration-none text-black d-flex flex-row bd-highlight d-flex justify-content-evenly align-items-center mb-3" routerLink="/producto/{{producto.id}}">
+        <div class=""> <img src={{producto.imagen}} alt={{producto.nombre}} />
         </div>
-      </div>
+        <div class="">
+          <h6 class="text-muted">{{producto.nombre}}</h6>
+        </div>
+        <div class="">
+          <h5 class="ms-5">{{ producto.precio_venta | currency : 'EUR':'symbol':'':'es'}}</h5>
+        </div>
+      </a>
+    </div>
   </div>
 </div>

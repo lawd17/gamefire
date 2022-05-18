@@ -8,13 +8,6 @@
   width: 6rem;
 }
 
-.title-precio-final{
-
-}
-
-.value-precio-final{
-
-}
 
 .item {
   .cart-product-remove{
@@ -53,4 +46,16 @@
 .btn-pedido{
   margin-top: 2rem;
   width: 100%;
+}
+
+.btn-pedido:hover {
+  cursor: pointer;
+}
+
+.textError{
+color: rgb(216, 40, 40);
+}
+
+.okMessage{
+  color: rgb(54, 177, 54)
 }

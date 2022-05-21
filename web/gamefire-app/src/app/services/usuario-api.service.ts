@@ -16,8 +16,8 @@ export class UsuarioApiService {
   userVarStorage = "authenticated"
   emailUserAutenticado: string = "";
 
-  loginUrl: string = "http://192.168.1.43/API/gamefire/api/login.php";
-  baseUserUrl: string = "http://192.168.1.43/API/gamefire/api/model/usuario/usuario.php";
+  loginUrl: string = "http://192.168.1.45/API/login.php";
+  baseUserUrl: string = "http://192.168.1.45/API/model/usuario/usuario.php";
 
   constructor(private http: HttpClient) {
     this.reloadAthenticatedStorage();
@@ -63,7 +63,7 @@ export class UsuarioApiService {
   }
 
   registerUser(usuario: FormGroup): Observable<boolean> {
-    return this.http.post<boolean>(this.baseUserUrl, JSON.stringify(usuario))
+    return this.http.post<boolean>(this.baseUserUrl, JSON.stringify(usuario.value))
   }
 
   public getUserAuthenticated(): Observable<apiUsuario> {
@@ -129,5 +129,5 @@ export class UsuarioApiService {
     this.removeLocalStorageData(this.emailUserAutenticado);
     this.reloadCartStorage();
   }
-  
+
 }

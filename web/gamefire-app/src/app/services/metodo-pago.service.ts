@@ -9,7 +9,7 @@ import { MetodoPago } from '../model/data/MetodoPago';
 })
 export class MetodoPagoService {
 
-  baseURL: string = "http://192.168.1.43/API/gamefire/api/model/usuario/metodo_pago.php";
+  baseURL: string = "http://192.168.1.45/API/model/usuario/metodo_pago.php";
 
   constructor(private http: HttpClient) {
   }
@@ -22,5 +22,5 @@ export class MetodoPagoService {
   postMetodoPago(metodoPago: MetodoPago): Observable<string> {
     return this.http.post<string>(this.baseURL, JSON.stringify(metodoPago))
   }
-  
+
 }

@@ -24,6 +24,10 @@ CREATE DATABASE IF NOT EXISTS `gamefire` DEFAULT CHARACTER SET utf8mb4 COLLATE u
 USE `gamefire`;
 
 -- --------------------------------------------------------
+CREATE USER 'gamefire'@'localhost' IDENTIFIED WITH mysql_native_password BY 'gamefire2022';
+GRANT ALL PRIVILEGES ON gamefire.* TO 'gamefire'@'localhost';
+FLUSH PRIVILEGES;
+
 
 --
 -- Estructura de tabla para la tabla `Categorias`

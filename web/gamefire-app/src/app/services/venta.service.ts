@@ -9,7 +9,7 @@ import { Venta } from '../model/data/Venta';
 })
 export class VentaService {
 
-  baseURL: string = "http://192.168.1.43/API/gamefire/api/model/venta/venta.php";
+  baseURL: string = "http://192.168.1.45/API/model/venta/venta.php";
 
   constructor(private http: HttpClient) {
   }
@@ -27,5 +27,5 @@ export class VentaService {
   postVenta(venta: Venta): Observable<string> {
     return this.http.post<string>(this.baseURL, JSON.stringify(venta))
   }
-  
+
 }

@@ -8,18 +8,19 @@
     <h5>{{message}}</h5>
   </div>
   <div class="list m-2">
-    <!-- Product List-->
-    <div class="producto-search " *ngFor="let producto of productos">
-      <a class="text-decoration-none text-black d-flex flex-row bd-highlight d-flex justify-content-evenly align-items-center mb-3" routerLink="/producto/{{producto.id}}">
-        <div class=""> <img src={{producto.imagen}} alt={{producto.nombre}} />
+    <div class="row">
+      <!-- Lista de productos por nombre-->
+      <div *ngFor="let producto of productos" class="col-12 col-md-4">
+        <div class="card m-2">
+          <a class="text-decoration-none text-black" routerLink="/producto/{{producto.id}}">
+            <img src={{producto.imagen}} class="card-img-top" alt={{producto.nombre}} />
+            <div class="card-body">
+              <h6 class="card-subtitle text-muted">{{producto.nombre}}</h6>
+              <h5 class="card-title">{{ producto.precio_venta | currency : 'EUR':'symbol':'':'es'}}</h5>
+            </div>
+          </a>
         </div>
-        <div class="">
-          <h6 class="text-muted">{{producto.nombre}}</h6>
-        </div>
-        <div class="">
-          <h5 class="ms-5">{{ producto.precio_venta | currency : 'EUR':'symbol':'':'es'}}</h5>
-        </div>
-      </a>
+      </div>
     </div>
   </div>
 </div>

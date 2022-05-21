@@ -6,15 +6,19 @@ include "../utilsDb.php";
 include "../errors.php";
 $dbConn =  connect($db);
 $fieldId = "id";
-$fieldVentaId = "id_venta";
+$fieldIdVenta = "id_venta";
 $tableName = "Detalles_venta";
 
-function validarDatos($input){
+/**
+ * Metodo que se encarga de comprobar que los datos cumplen 
+ * el formato requerido si no se lanza un http 400
+ */
+function validarDatos(array $input): void{
   $message = "";
 
-  $message = evaluarParametro($input,"id_venta", "/^[A-Za-z0-9]{1,50}$/", $message);
+  $message = evaluarParametro($input["id_venta"], "/^[A-Za-z0-9]{1,50}$/", $message);
   $message = evaluarParametro($input,"id_producto", "/^[A-Za-z0-9]{1,50}$/", $message);
-  $message = evaluarParametro($input,"cantidad", "/^\d{1,5}$/", $message);
+  $message = evaluarParametro($input["cantidad"], "/^\d{1,5}$/", $message);
 
   if ($message != "") {
     header(error_400() . $message);
@@ -26,6 +30,15 @@ function validarDatos($input){
   listar todos los posts o solo uno
  */
 if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+  if(isset($_GET[$fieldIdVenta]) && isset($_GET["productos"])){
+    $input = $_GET[$fieldIdVenta];
+    $response = obtenerListaProductosVenta($dbConn, $input);
+
+    ok_200();
+    echo json_encode($response);
+    exit();
+  }
+
   if (isset($_GET[$fieldId])){
     $input = $_GET[$fieldId];
     $response = obtenerUno($dbConn,$tableName, $fieldId ,$input);

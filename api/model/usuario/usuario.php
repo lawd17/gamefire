@@ -10,16 +10,20 @@ $fieldEmail = "email";
 $tableName = "Usuarios";
 $fieldPassword = "password";
 
-function validarDatos($input){
+/**
+ * Metodo que se encarga de comprobar que los datos cumplen 
+ * el formato requerido si no se lanza un http 400
+ */
+function validarDatos(array $input): void{
   $message = "";
   $password = $input["password"];
-  $message = evaluarParametro($input,"username", "/^[a-z0-9_-]{3,15}$/", $message);
+  $message = evaluarParametro($input["username"], "/^[a-z0-9_-]{3,15}$/", $message);
   if (substr($password, 0, 3) != "$2y") {
-    $message = evaluarParametro($input,"password", "/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z]?)\S{8,25}$/", $message);
+    $message = evaluarParametro($input["password"], "/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z]?)\S{8,25}$/", $message);
   }
-  $message = evaluarParametro($input,"nombre", "/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/", $message);
-  $message = evaluarParametro($input,"apellidos", "/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]?){1,5}$/", $message);
-  $message = evaluarParametro($input,"telefono", "/(\+34|0034|34)?[ -]*([0-9][ -]*){9}/", $message);
+  $message = evaluarParametro($input["nombre"], "/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/", $message);
+  $message = evaluarParametro($input["apellidos"], "/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]?){1,5}$/", $message);
+  $message = evaluarParametro($input["telefono"], "/(\+34|0034|34)?[ -]*([0-9][ -]*){9}/", $message);
 
   if ($message != "") {
     header(error_400() . $message);

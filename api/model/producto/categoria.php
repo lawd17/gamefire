@@ -8,10 +8,14 @@ $dbConn =  connect($db);
 $fieldId = "id";
 $tableName = "Categorias";
 
-function validarDatos($input){
+/**
+ * Metodo que se encarga de comprobar que los datos cumplen 
+ * el formato requerido si no se lanza un http 400
+ */
+function validarDatos(array $input) : void{
   $message = "";
 
-  $message = evaluarParametro($input,"nombre", "/^[A-ZÁÉÍÓÚa-zñáéíóú\s]*$/", $message);
+  $message = evaluarParametro($input["nombre"], "/^[A-ZÁÉÍÓÚa-zñáéíóú\s]*$/", $message);
 
   if ($message != 0) {
     header(error_400() . $message);
@@ -19,9 +23,7 @@ function validarDatos($input){
   }
 }
 
-/*
-  listar todos los posts o solo uno
- */
+//Peticion GET
 if ($_SERVER['REQUEST_METHOD'] == 'GET'){
   if (isset($_GET[$fieldId])){
     $input = $_GET[$fieldId];
@@ -40,8 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
 
 }
 
+//Funciones deshabilitadas
 /*
-// Crear un nuevo post
+//Peticion POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $input = obtenerDatosEntrada();
   validarDatos($input);
@@ -60,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 }
 
-//Borrar
+//Peticion DELETE
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE'){
 $input = $_GET;
 validarDatos($input);
@@ -72,7 +75,7 @@ exit;
 }
 
 
-//Actualizar
+//Peticion PUT
 if ($_SERVER['REQUEST_METHOD'] == 'PUT'){
 $input = $_GET;
 

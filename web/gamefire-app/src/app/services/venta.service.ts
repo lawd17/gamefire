@@ -9,7 +9,7 @@ import { Venta } from '../model/data/Venta';
 })
 export class VentaService {
 
-  baseURL: string = "http://192.168.1.45/API/model/venta/venta.php";
+  baseURL: string = "http://www.gamefire.com/API/model/venta/venta.php";
 
   constructor(private http: HttpClient) {
   }

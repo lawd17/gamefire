@@ -16,8 +16,8 @@ export class UsuarioService {
   userVarStorage = "authenticated"
   emailUserAutenticado: string = "";
 
-  loginUrl: string = "http://192.168.1.45/API/login.php";
-  baseUserUrl: string = "http://192.168.1.45/API/model/usuario/usuario.php";
+  loginUrl: string = "http://www.gamefire.com/API/login.php";
+  baseUserUrl: string = "http://www.gamefire.com/API/model/usuario/usuario.php";
 
   constructor(private http: HttpClient) {
     this.reloadAthenticatedStorage();
@@ -57,7 +57,7 @@ export class UsuarioService {
     this.removeLocalStorageData(this.userVarStorage)
   }
 
-  //TODO MIRAR SI ESTAS DOS FUNCIONES TIENEN SENTIDO
+
   postUser(usuario: Usuario): Observable<string> {
     return this.http.post<string>(this.baseUserUrl, JSON.stringify(usuario))
   }

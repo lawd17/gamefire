@@ -12,7 +12,7 @@ export class ProductoService {
   searchProductos: Producto[] = [];
   searchValue: string = "";
 
-  baseURL: string = "http://192.168.1.45/API/model/producto/producto.php";
+  baseURL: string = "http://www.gamefire.com/API/model/producto/producto.php";
 
   constructor(private http: HttpClient) {
   }

@@ -9,7 +9,7 @@ import { MetodoPago } from '../model/data/MetodoPago';
 })
 export class MetodoPagoService {
 
-  baseURL: string = "http://192.168.1.45/API/model/usuario/metodo_pago.php";
+  baseURL: string = "http://www.gamefire.com/API/model/usuario/metodo_pago.php";
 
   constructor(private http: HttpClient) {
   }

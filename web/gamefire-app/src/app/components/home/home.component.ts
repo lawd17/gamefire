@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Categoria } from 'src/app/model/data/Categoria';
-import { CategoriaApiService } from 'src/app/services/categoria-api.service';
+import { CategoriaService } from 'src/app/services/categoria.service';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +11,7 @@ import { CategoriaApiService } from 'src/app/services/categoria-api.service';
 export class HomeComponent implements OnInit {
   public categorias: Categoria[] = [];
 
-  constructor( public categoriaService: CategoriaApiService) {}
+  constructor( public categoriaService: CategoriaService) {}
 
   ngOnInit(): void {
     this.obtenerTodasCategorias();

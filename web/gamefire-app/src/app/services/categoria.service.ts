@@ -6,7 +6,7 @@ import { apiCategoria } from '../model/data/apiCategoria';
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriaApiService {
+export class CategoriaService {
 
   baseURL: string = "http://192.168.1.45/API/model/producto/categoria.php";
 

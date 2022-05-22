@@ -5,9 +5,9 @@ import localeEs from '@angular/common/locales/es';
 import { ProductoVenta } from 'src/app/model/data/ProductoVenta';
 import { Venta } from 'src/app/model/data/Venta';
 import { DetalleVentaService } from 'src/app/services/detalle-venta.service';
-import { UsuarioApiService } from 'src/app/services/usuario-api.service';
 import { VentaService } from 'src/app/services/venta.service';
 import { Usuario } from 'src/app/model/data/Usuario';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-detalle-pedido',
@@ -24,7 +24,7 @@ export class DetallePedidoComponent implements OnInit {
   constructor(
     private ventaService: VentaService,
     private detalleVentaService: DetalleVentaService,
-    private usuarioService: UsuarioApiService,
+    private usuarioService: UsuarioService,
     private route: ActivatedRoute,
     private router: Router)
   {}

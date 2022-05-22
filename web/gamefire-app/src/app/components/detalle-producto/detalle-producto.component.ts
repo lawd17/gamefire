@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProductosApiService } from 'src/app/services/productos-api.service';
 import { Location } from '@angular/common';
 import { Producto } from 'src/app/model/data/Producto';
-import { UsuarioApiService } from 'src/app/services/usuario-api.service';
 import { itemCarrito } from 'src/app/model/data/itemCarrito';
 import { Categoria } from 'src/app/model/data/Categoria';
-import { CategoriaApiService } from 'src/app/services/categoria-api.service';
+import { CategoriaService } from 'src/app/services/categoria.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { ProductoService } from 'src/app/services/producto.service';
 
 @Component({
   selector: 'app-detalle-producto',
@@ -19,9 +19,9 @@ export class DetalleProductoComponent implements OnInit {
   categoria!: Categoria
 
   constructor(
-    private productoService: ProductosApiService,
-    private categoriaService: CategoriaApiService,
-    private usuarioService: UsuarioApiService,
+    private productoService: ProductoService,
+    private categoriaService: CategoriaService,
+    private usuarioService: UsuarioService,
     private route: ActivatedRoute,
     private location: Location)
   {}

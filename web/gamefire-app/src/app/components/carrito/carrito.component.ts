@@ -13,7 +13,7 @@ import { Venta } from 'src/app/model/data/Venta';
 import { DetalleVentaService } from 'src/app/services/detalle-venta.service';
 import { DireccionService } from 'src/app/services/direccion.service';
 import { MetodoPagoService } from 'src/app/services/metodo-pago.service';
-import { UsuarioApiService } from 'src/app/services/usuario-api.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 import { VentaService } from 'src/app/services/venta.service';
 
 @Component({
@@ -36,7 +36,7 @@ export class CarritoComponent implements OnInit {
   readonly = true;
 
   constructor(
-    private usuarioService: UsuarioApiService,
+    private usuarioService: UsuarioService,
     private route: Router,
     private direccionService: DireccionService,
     private metdoPagoService: MetodoPagoService,

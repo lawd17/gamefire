@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UsuarioApiService } from 'src/app/services/usuario-api.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   password!: string;
   error = "";
 
-  constructor(private userService: UsuarioApiService, private route: Router) { }
+  constructor(private userService: UsuarioService, private route: Router) { }
 
   ngOnInit(): void {}
 

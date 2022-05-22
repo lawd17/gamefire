@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsuarioApiService } from 'src/app/services/usuario-api.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
   usuario!: FormGroup;
 
 
-  constructor(private userService: UsuarioApiService, private router: Router) { }
+  constructor(private userService: UsuarioService, private router: Router) { }
 
   ngOnInit(): void {
     this.createFormulario();

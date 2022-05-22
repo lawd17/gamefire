@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProductosApiService } from 'src/app/services/productos-api.service';
-import { UsuarioApiService } from 'src/app/services/usuario-api.service';
+import { ProductoService } from 'src/app/services/producto.service';
+import {  UsuarioService } from 'src/app/services/usuario.service';
 
 
 @Component({
@@ -13,8 +13,8 @@ import { UsuarioApiService } from 'src/app/services/usuario-api.service';
 export class NavbarComponent implements OnInit {
   searchValue: string = "";
 
-  constructor(private userService: UsuarioApiService,
-    private productoService: ProductosApiService,
+  constructor(private userService: UsuarioService,
+    private productoService: ProductoService,
     private router: Router)
   { }
 

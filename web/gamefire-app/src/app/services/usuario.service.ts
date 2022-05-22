@@ -10,7 +10,7 @@ import { Usuario } from '../model/data/Usuario';
   providedIn: 'root'
 })
 
-export class UsuarioApiService {
+export class UsuarioService {
   carrito: Array<itemCarrito> = [];
   autenticado: boolean = false;
   userVarStorage = "authenticated"

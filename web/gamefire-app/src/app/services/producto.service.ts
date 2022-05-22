@@ -8,7 +8,7 @@ import { Producto } from '../model/data/Producto';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductosApiService {
+export class ProductoService {
   searchProductos: Producto[] = [];
   searchValue: string = "";
 

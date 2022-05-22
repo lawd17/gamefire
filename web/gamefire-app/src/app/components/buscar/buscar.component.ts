@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/model/data/Producto';
-import { ProductosApiService } from 'src/app/services/productos-api.service';
+import { ProductoService } from 'src/app/services/producto.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
@@ -19,7 +19,7 @@ export class BuscarComponent implements OnInit {
   searchValue: string = "";
   spinner = false;
 
-  constructor(public productoService: ProductosApiService, private router: Router) {}
+  constructor(public productoService: ProductoService, private router: Router) {}
 
   ngOnInit(): void {
     registerLocaleData(localeEs, 'es')

@@ -6,7 +6,7 @@ import { Usuario } from 'src/app/model/data/Usuario';
 import { Venta } from 'src/app/model/data/Venta';
 import { DireccionService } from 'src/app/services/direccion.service';
 import { MetodoPagoService } from 'src/app/services/metodo-pago.service';
-import { UsuarioApiService } from 'src/app/services/usuario-api.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 import { VentaService } from 'src/app/services/venta.service';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
@@ -28,7 +28,7 @@ export class PerfilComponent implements OnInit {
   pedidos: Venta[] = []
 
   constructor(
-    private usuarioService: UsuarioApiService,
+    private usuarioService: UsuarioService,
     private direccionService: DireccionService,
     private metdoPagoService: MetodoPagoService,
     private ventaService: VentaService)

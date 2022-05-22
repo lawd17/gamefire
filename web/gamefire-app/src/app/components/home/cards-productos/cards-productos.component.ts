@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { Categoria } from 'src/app/model/data/Categoria';
 import { Producto } from 'src/app/model/data/Producto';
-import { ProductosApiService } from 'src/app/services/productos-api.service';
+import { ProductoService } from 'src/app/services/producto.service';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 
@@ -15,7 +15,7 @@ export class CardsProductosComponent implements OnInit {
   @Input() categoria!: Categoria; // decorate the property with @Input()
   public productos: Producto[] = [];
 
-  constructor( private router: AppRoutingModule, private poductosService: ProductosApiService) { }
+  constructor( private router: AppRoutingModule, private poductosService: ProductoService) { }
 
   ngOnInit(): void {
     registerLocaleData(localeEs, 'es')

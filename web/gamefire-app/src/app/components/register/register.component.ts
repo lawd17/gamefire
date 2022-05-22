@@ -47,7 +47,6 @@ export class RegisterComponent implements OnInit {
       .subscribe(data => {
         if (data) {
           this.userService.setLocalSotorageData(this.userService.userVarStorage, data)
-          this.userService.autenticado = data
           this.router.navigate(['/login'])
         } else {
           this.error = "Error en alguno de los datos introducido.";

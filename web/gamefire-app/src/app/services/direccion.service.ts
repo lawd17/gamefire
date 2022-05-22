@@ -9,7 +9,7 @@ import { Direccion } from '../model/data/Direccion';
 })
 export class DireccionService {
 
-  baseURL: string = "http://www.gamefire.com/API/model/usuario/direccion.php";
+  baseURL: string = "http://gamefire.com/API/model/usuario/direccion.php";
 
   constructor(private http: HttpClient) {
   }

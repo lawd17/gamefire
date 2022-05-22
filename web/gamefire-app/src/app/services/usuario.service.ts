@@ -16,8 +16,8 @@ export class UsuarioService {
   userVarStorage = "authenticated"
   emailUserAutenticado: string = "";
 
-  loginUrl: string = "http://www.gamefire.com/API/login.php";
-  baseUserUrl: string = "http://www.gamefire.com/API/model/usuario/usuario.php";
+  loginUrl: string = "http://gamefire.com/API/login.php";
+  baseUserUrl: string = "http://gamefire.com/API/model/usuario/usuario.php";
 
   constructor(private http: HttpClient) {
     this.reloadAthenticatedStorage();

@@ -109,26 +109,31 @@ export class PerfilComponent implements OnInit {
   obtenerMetodoPago(id_usuario: number) {
     this.metdoPagoService.getMetodoPago(id_usuario)
       .subscribe(data => {
-        var numero_cuenta = parseInt(data.numero_cuenta);
-        var cvv = parseInt(data.cvv);
+        if (data.toString() != "false") {
+          var numero_cuenta = parseInt(data.numero_cuenta);
+          var cvv = parseInt(data.cvv);
 
-        if (isNaN(numero_cuenta)) {
-          numero_cuenta = 0;
+          if (isNaN(numero_cuenta)) {
+            numero_cuenta = 0;
+          }
+
+          if (isNaN(cvv)) {
+            cvv = 0;
+          }
+
+          this.metodoPago =
+            new MetodoPago(
+              parseInt(data.id),
+              data.tipo_pago,
+              data.titular,
+              numero_cuenta,
+              data.expiracion,
+              cvv,
+              parseInt(data.id_usuario))
+        } else {
+          this.metodoPago = new MetodoPago(0, "", "", 0, "", 0, id_usuario);
         }
 
-        if (isNaN(cvv)) {
-          cvv = 0;
-        }
-
-        this.metodoPago =
-          new MetodoPago(
-            parseInt(data.id),
-            data.tipo_pago,
-            data.titular,
-            numero_cuenta,
-            data.expiracion,
-            cvv,
-            parseInt(data.id_usuario))
       }, (error: HttpErrorResponse) => this.controlError(error))
 
   }

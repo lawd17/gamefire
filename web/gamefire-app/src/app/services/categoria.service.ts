@@ -8,7 +8,7 @@ import { apiCategoria } from '../model/data/apiCategoria';
 })
 export class CategoriaService {
 
-  baseURL: string = "http://www.gamefire.com/API/model/producto/categoria.php";
+  baseURL: string = "http://gamefire.com/API/model/producto/categoria.php";
 
   constructor(private http: HttpClient) {
   }

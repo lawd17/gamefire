@@ -118,10 +118,10 @@ function actualizar(string $fieldId, PDO $dbConn, string $tableName, array $inpu
  * Funcion que se encarga de obtener todos los registros que cumplan con el parametro, con un limite 
  * por defecto de 20
  */
-function obtenerTodosByField(PDO $dbConn, string $tableName, string $columName, array $input, int $limit = 20): array{
+function obtenerTodosByField(PDO $dbConn, string $tableName, string $columName, mixed $columValue, int $limit = 20): array{
   try {
     $statement = $dbConn->prepare("SELECT * FROM $tableName where $columName=:$columName LIMIT $limit");
-    $statement->bindValue(":$columName", $input[$columName]);
+    $statement->bindValue(":$columName", $columValue);
     $statement->execute();
     $statement->setFetchMode(PDO::FETCH_ASSOC);
 

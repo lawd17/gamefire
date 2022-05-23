@@ -27,11 +27,7 @@ $fieldEmail = "email";
 $fieldPassword = "password";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $json = file_get_contents('php://input');
-    $stdClass = json_decode($json);
-
-    $input = json_decode(json_encode($stdClass), TRUE);
-
+    $input = obtenerDatosEntrada();
     validarDatos($input);
 
     $email = $input[$fieldEmail];

@@ -61,7 +61,7 @@ function getSqlValues(array $input): string{
 /**
  * Funcion que se encarga de insertar un campo en la base de datos
  */
-function insertar(PDO $dbConn, string $tableName, array $input): mixed{
+function insertar(PDO $dbConn, string $tableName, array $input){
   try {
     $params = getSqlParams($input);
     $values = getSqlValues($input);
@@ -97,7 +97,7 @@ function eliminar(string $fieldId, PDO $dbConn, string $tableName, array $input)
 /**
  * Funcion que se encarga de actualizar un campo en la base de datos
  */
-function actualizar(string $fieldId, PDO $dbConn, string $tableName, array $input): mixed{
+function actualizar(string $fieldId, PDO $dbConn, string $tableName, array $input){
   try {
     $id = $input[$fieldId];
     $fields = getParams($input);
@@ -118,7 +118,7 @@ function actualizar(string $fieldId, PDO $dbConn, string $tableName, array $inpu
  * Funcion que se encarga de obtener todos los registros que cumplan con el parametro, con un limite 
  * por defecto de 20
  */
-function obtenerTodosByField(PDO $dbConn, string $tableName, string $columName, mixed $columValue, int $limit = 20): array{
+function obtenerTodosByField(PDO $dbConn, string $tableName, string $columName, $columValue, int $limit = 20): array{
   try {
     $statement = $dbConn->prepare("SELECT * FROM $tableName where $columName=:$columName LIMIT $limit");
     $statement->bindValue(":$columName", $columValue);
@@ -168,7 +168,7 @@ function obtenerPorNombre(PDO $dbConn, string $tableName, string $columName, str
 /**
  * Funcion que se encarga e comprobar is un elementos ya existe en la base de datos 
  */
-function existe(PDO $dbConn, string $tableName, string $columName, mixed $columnValue): bool{
+function existe(PDO $dbConn, string $tableName, string $columName, $columnValue): bool{
   $elemento = obtenerUno($dbConn, $tableName, $columName, $columnValue);
 
   if ($elemento != "") {
@@ -207,7 +207,7 @@ function obtenerListaProductosVenta(PDO $dbConn, int $valueIdVenta): array{
 /**
  * Funcion que se obtiene un registro concreto de la base de datos 
  */
-function obtenerUno(PDO $dbConn, string $tableName, string $columName, mixed $columnValue): array{
+function obtenerUno(PDO $dbConn, string $tableName, string $columName, $columnValue): array{
   try {
     $statement = $dbConn->prepare("SELECT * FROM $tableName where $columName=:$columName");
     $statement->bindValue(":$columName", $columnValue);
@@ -223,7 +223,7 @@ function obtenerUno(PDO $dbConn, string $tableName, string $columName, mixed $co
 /**
  * Funcion que valida si el parametros cumple el patron
  */
-function evaluarParametro(mixed $value, string $regex, string $message): string{
+function evaluarParametro($value, string $regex, string $message): string{
 
   $valido = false;
   if(preg_match($regex, $value) == 1){

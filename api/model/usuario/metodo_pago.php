@@ -56,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
   if (isset($_GET[$fieldIdUser])){
     $input = $_GET[$fieldIdUser];
     $response = obtenerUno($dbConn, $tableName, $fieldIdUser ,$input);
+
     ok_200();
     echo json_encode($response);
     exit();
@@ -72,10 +73,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $input = obtenerDatosEntrada();
   validarDatos($input);
-
   $input = verificarDatos($input);
 
-  $existe = existe($dbConn, $tableName, $fieldId, $input[$fieldId]);
+  $existe = existe($dbConn, $tableName, $fieldIdUser, $input[$fieldIdUser]);
 
   if ($existe) {
     $response = actualizar($fieldId, $dbConn, $tableName, $input);

@@ -14,9 +14,9 @@ export class MetodoPagoService {
   constructor(private http: HttpClient) {
   }
 
-  public getMetodoPago(id: number): Observable<apiMetodoPago> {
+  public getMetodoPago(id_usuario: number): Observable<apiMetodoPago> {
     console.log('getMetodoPago '+ this.baseURL);
-    return this.http.get<apiMetodoPago>(this.baseURL + "?id_usuario=" + id);
+    return this.http.get<apiMetodoPago>(this.baseURL + "?id_usuario=" + id_usuario);
   }
 
   postMetodoPago(metodoPago: MetodoPago): Observable<string> {

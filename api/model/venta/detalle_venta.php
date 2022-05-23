@@ -17,7 +17,7 @@ function validarDatos(array $input): void{
   $message = "";
 
   $message = evaluarParametro($input["id_venta"], "/^[A-Za-z0-9]{1,50}$/", $message);
-  $message = evaluarParametro($input,"id_producto", "/^[A-Za-z0-9]{1,50}$/", $message);
+  $message = evaluarParametro($input["id_producto"], "/^[A-Za-z0-9]{1,50}$/", $message);
   $message = evaluarParametro($input["cantidad"], "/^\d{1,5}$/", $message);
 
   if ($message != "") {

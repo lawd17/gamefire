@@ -41,7 +41,7 @@ $limit = 10;
   listar todos los posts o solo uno
  */
 if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-  if ($_GET["limit"]) {
+  if (isset($_GET["limit"])) {
     $limit = intval($_GET["limit"]);
   }
 
@@ -73,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
     exit();
   }
 }
+
 /*
 //Peticion POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){

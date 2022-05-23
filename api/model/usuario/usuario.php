@@ -62,8 +62,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $input = obtenerDatosEntrada();
   validarDatos($input);
+  
+  if (isset($input[$fieldId])) {
+    $id = $input[$fieldId];
+  } else {
+    $id = 0;
+  }
 
-  $existe = existe($dbConn, $tableName, $fieldId, $input[$fieldId]);
+  $existe = existe($dbConn, $tableName, $fieldId, $id);
   
   //encriptar contraseña
   if (substr($input[$fieldPassword], 0, 3) != "$2y") {
